@@ -15,7 +15,7 @@ public class Shot : MonoBehaviour
     public GameObject I;  // い
     public GameObject U;  // う
     public GameObject E;  // え
-    // public GameObject O;  // お
+    public GameObject O;  // お
 
     public GameObject KA; // か
     public GameObject KI; // き
@@ -107,14 +107,12 @@ public class Shot : MonoBehaviour
     public GameObject LYU; // ゅ
     public GameObject LYO; // ょ
 
+    public GameObject VU; // ゔ
     public GameObject haihun; // ー
-    // public GameObject VU; // ゔ
 
     Rigidbody rb;
 
     Dictionary<char, GameObject> myTable = new Dictionary<char, GameObject>();
-
-    string tmp = "アイウエ";
 
     void Start()
     {
@@ -122,7 +120,7 @@ public class Shot : MonoBehaviour
         myTable.Add('イ', I);
         myTable.Add('ウ', U);
         myTable.Add('エ', E);
-        // myTable.Add('オ', O);
+        myTable.Add('オ', O);
 
         myTable.Add('カ', KA);
         myTable.Add('キ', KI);
@@ -213,9 +211,9 @@ public class Shot : MonoBehaviour
         myTable.Add('ャ', LYA);
         myTable.Add('ュ', LYU);
         myTable.Add('ョ', LYO);
-        
+
+        myTable.Add('ヴ', VU);
         myTable.Add('ー', haihun);
-        // myTable.Add('ヴ', VU);
 }
 
     float time;
@@ -224,43 +222,49 @@ public class Shot : MonoBehaviour
     int flag = 0;
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if(Voice.voiceFlag == 1)
+        //if (Input.GetMouseButtonDown(0))
         {
+            Voice.voiceFlag = 2;
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+            Vector3 playerPosition = Player.transform.position;
+            Vector3 enemyPosition;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Enemy"))
             {
-                if (hit.collider.CompareTag("Enemy"))
-                {
-                    Vector3 playerPosition = Player.transform.position;
-                    Vector3 enemyPosition = hit.collider.gameObject.transform.position;
-
-                    float px = playerPosition.x;
-                    float py = playerPosition.y;
-                    float pz = playerPosition.z;
-
-                    float ex = enemyPosition.x;
-                    float ey = enemyPosition.y;
-                    float ez = enemyPosition.z;
-
-                    Vector3 angle_y_from = Vector3.forward;
-                    Vector3 angle_y_to = new Vector3(ex-px, 0f, ez - pz);
-                    float angle_y = Vector3.SignedAngle(angle_y_from, angle_y_to, Vector3.up);
-
-                    Vector3 angle_x_from = new Vector3(ex - px, 0f, ez - pz);
-                    Vector3 angle_x_to = new Vector3(ex - px, ey - py, ez - pz);
-                    Vector3 angle_x_vertical = new Vector3((float)Math.Cos(-angle_y * (Math.PI / 180)), 0f, (float)Math.Sin(-angle_y * (Math.PI / 180)));
-                    float angle_x = Vector3.SignedAngle(angle_x_from, angle_x_to, angle_x_vertical);
-                    
-                    transform.rotation = Quaternion.Euler(angle_x, angle_y, 0f);
-
-                    flag = 1;
-                    time = 0;
-                    cnt = 0;
-                    n = tmp.Length;
-                }
+                enemyPosition = hit.collider.gameObject.transform.position;
             }
+            else
+            {
+                enemyPosition = Input.mousePosition;
+                enemyPosition.z = 15f;
+                enemyPosition = Camera.main.ScreenToWorldPoint(enemyPosition);
+            }
+            float px = playerPosition.x;
+            float py = playerPosition.y;
+            float pz = playerPosition.z;
+
+            float ex = enemyPosition.x;
+            float ey = enemyPosition.y;
+            float ez = enemyPosition.z;
+
+            Vector3 angle_y_from = Vector3.forward;
+            Vector3 angle_y_to = new Vector3(ex - px, 0f, ez - pz);
+            float angle_y = Vector3.SignedAngle(angle_y_from, angle_y_to, Vector3.up);
+
+            Vector3 angle_x_from = new Vector3(ex - px, 0f, ez - pz);
+            Vector3 angle_x_to = new Vector3(ex - px, ey - py, ez - pz);
+            Vector3 angle_x_vertical = new Vector3((float)Math.Cos(-angle_y * (Math.PI / 180)), 0f, (float)Math.Sin(-angle_y * (Math.PI / 180)));
+            float angle_x = Vector3.SignedAngle(angle_x_from, angle_x_to, angle_x_vertical);
+
+            transform.rotation = Quaternion.Euler(angle_x, angle_y, 0f);
+
+            flag = 1;
+            time = 0;
+            cnt = 0;
+            n = Voice.voiceText.Length;
         }
 
         if (flag == 1)
@@ -270,7 +274,7 @@ public class Shot : MonoBehaviour
             if (time > shotInterval)
             {
                 Vector3 playerPosition = Player.transform.position;
-                GameObject c = Instantiate(myTable[tmp[cnt]], playerPosition, Quaternion.identity);
+                GameObject c = Instantiate(myTable[Voice.voiceText[cnt]], playerPosition, Quaternion.identity);
                 rb = c.AddComponent<Rigidbody>();
                 rb.useGravity = false;
                 rb.AddForce(transform.forward * thrust);
@@ -281,6 +285,8 @@ public class Shot : MonoBehaviour
                 {
                     flag = 0;
                     c.tag = lastMojiTag;
+                    Voice.voiceFlag = 0;
+                    Voice.voiceText = "";
                 }
             }
         }

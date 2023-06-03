@@ -5,6 +5,18 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public GameObject explosionPrefab;
+    float z;
+    void Start()
+    {
+        z = gameObject.transform.position.z;
+    }
+    void Update()
+    {
+        if(gameObject.transform.position.z > z + 50)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void OnTriggerEnter(Collider collider)
     {

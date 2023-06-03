@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.Windows.Speech;
 using NMeCab.Specialized;
 
-
 public class Voice: MonoBehaviour
 {
+    public static int voiceFlag;
+    public static string voiceText;
 
     DictationRecognizer dictationRecognizer;
-    string voiceText;
+    string tmp;
 
     void Start()
     {
@@ -17,13 +18,16 @@ public class Voice: MonoBehaviour
 
         dictationRecognizer.Start();
         Debug.Log("音声認識開始");
+
+        voiceFlag = 0;
     }
 
     void Update()
     {
-        dictationRecognizer.DictationResult += DictationRecognizer_DictationResult;         //音声認識完了したら出力
-
-        dictationRecognizer.DictationError += DictationRecognizer_DictationError;           //音声認識エラー
+        if (voiceFlag == 0)
+        {
+            dictationRecognizer.DictationResult += DictationRecognizer_DictationResult;         //音声認識完了したら出力
+        }
     }
 
     string KanjiToKatakana(string sentence)  // 漢字をカタカナに変換
@@ -47,17 +51,13 @@ public class Voice: MonoBehaviour
 
     private void DictationRecognizer_DictationResult(string text, ConfidenceLevel confidence)
     {
-        if (voiceText != text)
+        if (tmp != text)
         {
-            voiceText = text;
+            tmp = text;
             text = KanjiToKatakana(text);
             Debug.Log("認識した音声：" + text);
+            voiceFlag = 1;
+            voiceText = text;
         }
     }
-
-    private void DictationRecognizer_DictationError(string error, int hresult)
-    {
-        Debug.Log("音声認識エラー");
-    }
-    
 }
