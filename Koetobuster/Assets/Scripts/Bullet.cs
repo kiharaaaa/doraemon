@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    /*
-    void OnCollisionExit(Collision collision)
-    {
-        Destroy(gameObject);
-        Destroy(collision.gameObject);
-    }
-    */
-    void OnTriggerExit(Collider collider)
+    public GameObject explosionPrefab;
+
+    void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Enemy")
         {
+            if (gameObject.tag == Shot.lastMojiTag)
+            {
+                Destroy(collider.gameObject);
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
-            Destroy(collider.gameObject);
         }
     }
 }

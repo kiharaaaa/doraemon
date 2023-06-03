@@ -8,21 +8,20 @@ public class Shot : MonoBehaviour
     public float thrust;
     public GameObject Player;
     public GameObject Bullet;
-
+    public float shotInterval;
+    public static string lastMojiTag = "LastMoji";
 
     public GameObject A;  // あ
     public GameObject I;  // い
     public GameObject U;  // う
     public GameObject E;  // え
-    public GameObject O;  // お
+    // public GameObject O;  // お
 
     public GameObject KA; // か
     public GameObject KI; // き
     public GameObject KU; // く
     public GameObject KE; // け
     public GameObject KO; // こ
-
-    /*
 
     public GameObject SA; // さ
     public GameObject SI; // し
@@ -109,14 +108,13 @@ public class Shot : MonoBehaviour
     public GameObject LYO; // ょ
 
     public GameObject haihun; // ー
-    public GameObject VU; // ゔ
-    */
+    // public GameObject VU; // ゔ
 
     Rigidbody rb;
 
     Dictionary<char, GameObject> myTable = new Dictionary<char, GameObject>();
 
-    string tmp = "アアアアアアアアアアア";
+    string tmp = "アイウエ";
 
     void Start()
     {
@@ -124,14 +122,13 @@ public class Shot : MonoBehaviour
         myTable.Add('イ', I);
         myTable.Add('ウ', U);
         myTable.Add('エ', E);
-        myTable.Add('オ', O);
+        // myTable.Add('オ', O);
 
         myTable.Add('カ', KA);
         myTable.Add('キ', KI);
         myTable.Add('ク', KU);
         myTable.Add('ケ', KE);
         myTable.Add('コ', KO);
-        /*
 
         myTable.Add('サ', SA);
         myTable.Add('シ', SI);
@@ -218,10 +215,13 @@ public class Shot : MonoBehaviour
         myTable.Add('ョ', LYO);
         
         myTable.Add('ー', haihun);
-        myTable.Add('ヴ', VU);
-        */
+        // myTable.Add('ヴ', VU);
 }
 
+    float time;
+    int cnt;
+    int n;
+    int flag = 0;
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -234,10 +234,15 @@ public class Shot : MonoBehaviour
                 if (hit.collider.CompareTag("Enemy"))
                 {
                     Vector3 playerPosition = Player.transform.position;
-                    //GameObject bullet = Instantiate(Bullet, playerPosition, Quaternion.identity);
                     Vector3 enemyPosition = hit.collider.gameObject.transform.position;
-                    float px = playerPosition.x, py = playerPosition.y, pz = playerPosition.z;
-                    float ex = enemyPosition.x, ey = enemyPosition.y, ez = enemyPosition.z;
+
+                    float px = playerPosition.x;
+                    float py = playerPosition.y;
+                    float pz = playerPosition.z;
+
+                    float ex = enemyPosition.x;
+                    float ey = enemyPosition.y;
+                    float ez = enemyPosition.z;
 
                     Vector3 angle_y_from = Vector3.forward;
                     Vector3 angle_y_to = new Vector3(ex-px, 0f, ez - pz);
@@ -245,32 +250,39 @@ public class Shot : MonoBehaviour
 
                     Vector3 angle_x_from = new Vector3(ex - px, 0f, ez - pz);
                     Vector3 angle_x_to = new Vector3(ex - px, ey - py, ez - pz);
-                    Vector3 angle_x_v = new Vector3((float)Math.Cos(-angle_y * (Math.PI / 180)), 0f, (float)Math.Sin(-angle_y * (Math.PI / 180)));
-                    float angle_x = Vector3.SignedAngle(angle_x_from, angle_x_to, angle_x_v);
-
+                    Vector3 angle_x_vertical = new Vector3((float)Math.Cos(-angle_y * (Math.PI / 180)), 0f, (float)Math.Sin(-angle_y * (Math.PI / 180)));
+                    float angle_x = Vector3.SignedAngle(angle_x_from, angle_x_to, angle_x_vertical);
                     
                     transform.rotation = Quaternion.Euler(angle_x, angle_y, 0f);
 
-                    int n = tmp.Length;
-                    for (int i = 0; i < n; i++)
-                    {
-                        GameObject c = Instantiate(myTable[tmp[i]], playerPosition, Quaternion.identity);
-                        rb = c.GetComponent<Rigidbody>();
-                        rb.AddForce(transform.forward * thrust);
-                    }
+                    flag = 1;
+                    time = 0;
+                    cnt = 0;
+                    n = tmp.Length;
                 }
             }
         }
 
-        /*
-        void Attack(char t)
+        if (flag == 1)
         {
-            GameObject c = Instantiate(myTable[t], playerPosition, Quaternion.identity);
-            rb = c.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * thrust);
+            time += Time.deltaTime;
+
+            if (time > shotInterval)
+            {
+                Vector3 playerPosition = Player.transform.position;
+                GameObject c = Instantiate(myTable[tmp[cnt]], playerPosition, Quaternion.identity);
+                rb = c.AddComponent<Rigidbody>();
+                rb.useGravity = false;
+                rb.AddForce(transform.forward * thrust);
+
+                time = 0;
+                cnt++;
+                if (cnt == n)
+                {
+                    flag = 0;
+                    c.tag = lastMojiTag;
+                }
+            }
         }
-        */
     }
-
-
 }

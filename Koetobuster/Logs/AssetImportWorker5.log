@@ -1,0 +1,291 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.21f1 (1b156197d683) revision 1774945'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22621) 64bit Core' Language: 'ja' Physical Memory: 16310 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker5
+-projectPath
+C:/Users/kihara/Documents/doraemon/Koetobuster
+-logFile
+Logs/AssetImportWorker5.log
+-srvPort
+61903
+Successfully changed project path to: C:/Users/kihara/Documents/doraemon/Koetobuster
+C:/Users/kihara/Documents/doraemon/Koetobuster
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [29852] Host "[IP] 192.168.3.40 [Port] 0 [Flags] 2 [Guid] 3551299210 [EditorId] 3551299210 [Version] 1048832 [Id] WindowsEditor(7,K) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [29852] Host "[IP] 192.168.3.40 [Port] 0 [Flags] 2 [Guid] 3551299210 [EditorId] 3551299210 [Version] 1048832 [Id] WindowsEditor(7,K) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+Refreshing native plugins compatible for Editor in 52.82 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.21f1 (1b156197d683)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/kihara/Documents/doraemon/Koetobuster/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3070 Ti (ID=0x2482)
+    Vendor:   NVIDIA
+    VRAM:     8031 MB
+    Driver:   31.0.15.2756
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56344
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
+Registered in 0.004868 seconds.
+Native extension for UWP target not found
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 49.97 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.461 seconds
+Domain Reload Profiling:
+	ReloadAssembly (461ms)
+		BeginReloadAssembly (65ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (320ms)
+			LoadAssemblies (63ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (76ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (18ms)
+			SetupLoadedEditorAssemblies (188ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (50ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (94ms)
+				ProcessInitializeOnLoadMethodAttributes (35ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.005187 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\kihara\Documents\doraemon\Koetobuster\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\kihara\Documents\doraemon\Koetobuster\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for UWP target not found
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.56 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.747 seconds
+Domain Reload Profiling:
+	ReloadAssembly (748ms)
+		BeginReloadAssembly (94ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (6ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (18ms)
+		EndReloadAssembly (575ms)
+			LoadAssemblies (69ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (191ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (40ms)
+			SetupLoadedEditorAssemblies (248ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (58ms)
+				ProcessInitializeOnLoadAttributes (163ms)
+				ProcessInitializeOnLoadMethodAttributes (15ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 0.52 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3053 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 23 unused Assets / (56.4 KB). Loaded Objects now: 3514.
+Memory consumption went from 107.7 MB to 107.6 MB.
+Total: 2.514400 ms (FindLiveObjects: 0.234300 ms CreateObjectMapping: 0.078000 ms MarkObjects: 2.139600 ms  DeleteObjects: 0.061800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1392910.239024 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ガ.prefab
+  artifactKey: Guid(2df583d77c038f14698c1b3f5e1dc4c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ガ.prefab using Guid(2df583d77c038f14698c1b3f5e1dc4c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b2c233d8a2cc5f6d9edfabb2b6bae3f7') in 0.117369 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 146.162073 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/サ.prefab
+  artifactKey: Guid(b72b37c4353da854d83cf690a31398ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/サ.prefab using Guid(b72b37c4353da854d83cf690a31398ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03e405e998d77883a8082948e9c7c08d') in 0.010758 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/シ.prefab
+  artifactKey: Guid(ca16f2ae079991d499bd9cff8aeaa936) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/シ.prefab using Guid(ca16f2ae079991d499bd9cff8aeaa936) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6b03c80bb5eb0405020c7fb114c8373') in 0.010164 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ソ.prefab
+  artifactKey: Guid(ae90f55164fd50a46b4cd30fe4a7717f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ソ.prefab using Guid(ae90f55164fd50a46b4cd30fe4a7717f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e939ced7f24c68a2f26ca101fb60baf') in 0.011830 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ズ.prefab
+  artifactKey: Guid(33b484fe9772c254b8d8bc8195c014fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ズ.prefab using Guid(33b484fe9772c254b8d8bc8195c014fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '715a593eccc758795c1ec90f77faadab') in 0.008737 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ジ.prefab
+  artifactKey: Guid(d416e501b7165e142a388474ce535db2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ジ.prefab using Guid(d416e501b7165e142a388474ce535db2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c0910a88efafb90f7989ae6ea7cec85') in 0.010144 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ザ.prefab
+  artifactKey: Guid(8b8dd85d25036bf43bcd8e5f1dd83847) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ザ.prefab using Guid(8b8dd85d25036bf43bcd8e5f1dd83847) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd66495c79b944df14e5ac0c2a2e03af5') in 0.015466 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ス.prefab
+  artifactKey: Guid(874376dae36c1344ba8a8c38ebd477f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ス.prefab using Guid(874376dae36c1344ba8a8c38ebd477f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5c1410adbf9d1fa2a72b5c1ceba6cf28') in 0.009777 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ゾ.prefab
+  artifactKey: Guid(8a040ad67b2ffe943957508c52db4666) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ゾ.prefab using Guid(8a040ad67b2ffe943957508c52db4666) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '130be4ad2c640fae93f0a9d755e6bc84') in 0.008894 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ゼ.prefab
+  artifactKey: Guid(b604cbbf12e2b7e44969bb73cea662b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ゼ.prefab using Guid(b604cbbf12e2b7e44969bb73cea662b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '43ef73d38136221c4b689ac7b43815c4') in 0.010305 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 126.477226 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/デ.prefab
+  artifactKey: Guid(efa53e9df93f58c4683e302c9743ec01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/デ.prefab using Guid(efa53e9df93f58c4683e302c9743ec01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32e46b7151fc10cdc02c16c865636fc9') in 0.010060 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.002869 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/タ.prefab
+  artifactKey: Guid(05ff34197b0736e4fbd336d1626e97fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/タ.prefab using Guid(05ff34197b0736e4fbd336d1626e97fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01238aff3caa6032c9f6e0f76e3ebedf') in 0.010073 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/チ.prefab
+  artifactKey: Guid(5bdf971c4e6ae4a408d7119033c8fd60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/チ.prefab using Guid(5bdf971c4e6ae4a408d7119033c8fd60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fce373e665b08fb038722fbe95c53e6b') in 0.010662 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ト.prefab
+  artifactKey: Guid(9ec0052254716aa4fad19d098690aa85) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ト.prefab using Guid(9ec0052254716aa4fad19d098690aa85) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ebadb71befa9baacd5e72f568a677ac9') in 0.011395 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/テ.prefab
+  artifactKey: Guid(b012e59945151354f8ca002255ea2685) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/テ.prefab using Guid(b012e59945151354f8ca002255ea2685) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '298b7bb2ce2434eb0393c471af18bfe0') in 0.007977 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ツ.prefab
+  artifactKey: Guid(08f43170162043047aef7526698cff53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ツ.prefab using Guid(08f43170162043047aef7526698cff53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d573afa4d5ec5c4745505cda3cc15bf') in 0.009849 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ヂ.prefab
+  artifactKey: Guid(6a041160b5d3a7043a06cfa2762a1906) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ヂ.prefab using Guid(6a041160b5d3a7043a06cfa2762a1906) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3df9fa49fd2eee0ef108b7ee73c8ed6d') in 0.009418 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ド.prefab
+  artifactKey: Guid(698fa0d2e025f4c468d7ecd2c32dd880) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ド.prefab using Guid(698fa0d2e025f4c468d7ecd2c32dd880) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a758bec3c32c004198c536284bae902') in 0.008781 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ヅ.prefab
+  artifactKey: Guid(1422c3682dc6cb94ab5d3b162d9ea170) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ヅ.prefab using Guid(1422c3682dc6cb94ab5d3b162d9ea170) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e76789a90b4ae3327b3bbd78ffb92425') in 0.010517 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Prefab/3DMoji/Prefab/ッ.prefab
+  artifactKey: Guid(0ff598b1266c3a64eac80131e26ea010) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/3DMoji/Prefab/ッ.prefab using Guid(0ff598b1266c3a64eac80131e26ea010) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'faf2627295cf061cb48a24a07a626293') in 0.009705 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
