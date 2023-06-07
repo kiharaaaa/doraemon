@@ -105,6 +105,7 @@ public class Shot : MonoBehaviour
     public GameObject LYA; // ゃ
     public GameObject LYU; // ゅ
     public GameObject LYO; // ょ
+    public GameObject LTU; // っ
 
     public GameObject VU; // ゔ
     public GameObject haihun; // ー
@@ -210,6 +211,7 @@ public class Shot : MonoBehaviour
         myTable.Add('ャ', LYA);
         myTable.Add('ュ', LYU);
         myTable.Add('ョ', LYO);
+        myTable.Add('ッ', LTU);
 
         myTable.Add('ヴ', VU);
         myTable.Add('ー', haihun);
