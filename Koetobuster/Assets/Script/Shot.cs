@@ -7,7 +7,6 @@ public class Shot : MonoBehaviour
 {
     public float thrust;
     public GameObject Player;
-    public GameObject Bullet;
     public float shotInterval;
     public static string lastMojiTag = "LastMoji";
 

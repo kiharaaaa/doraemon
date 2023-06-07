@@ -22,9 +22,15 @@ public class Voice: MonoBehaviour
         voiceFlag = 0;
     }
 
+    string tt = "";
     void Update()
-    {
-        if (voiceFlag == 0)
+    {        
+        if (tt != dictationRecognizer.Status.ToString())
+        {
+            Debug.Log(dictationRecognizer.Status);
+            tt = dictationRecognizer.Status.ToString();
+        }
+            if (voiceFlag == 0)
         {
             dictationRecognizer.DictationResult += DictationRecognizer_DictationResult;         //âπê∫îFéØäÆóπÇµÇΩÇÁèoóÕ
         }
