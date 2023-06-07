@@ -9,6 +9,8 @@ public class Voice: MonoBehaviour
     public static int voiceFlag;
     public static string voiceText;
 
+    Dictionary<char, char> c = new Dictionary<char, char>();
+
     DictationRecognizer dictationRecognizer;
     string tmp;
 
@@ -20,6 +22,26 @@ public class Voice: MonoBehaviour
         Debug.Log("音声認識開始");
 
         voiceFlag = 0;
+
+        c.Add('ア', 'あ');c.Add('イ', 'い');c.Add('ウ', 'う');c.Add('エ', 'え');c.Add('オ', 'お');
+        c.Add('カ', 'か');c.Add('キ', 'き');c.Add('ク', 'く');c.Add('ケ', 'け');c.Add('コ', 'こ');
+        c.Add('サ', 'さ');c.Add('シ', 'し');c.Add('ス', 'す');c.Add('セ', 'せ');c.Add('ソ', 'そ');
+        c.Add('タ', 'た');c.Add('チ', 'ち');c.Add('ツ', 'つ');c.Add('テ', 'て');c.Add('ト', 'と');
+        c.Add('ナ', 'な');c.Add('ニ', 'に');c.Add('ヌ', 'ぬ');c.Add('ネ', 'ね');c.Add('ノ', 'の');
+        c.Add('ハ', 'は');c.Add('ヒ', 'ひ');c.Add('フ', 'ふ');c.Add('ヘ', 'へ');c.Add('ホ', 'ほ');
+        c.Add('マ', 'ま');c.Add('ミ', 'み');c.Add('ム', 'む');c.Add('メ', 'め');c.Add('モ', 'も');
+        c.Add('ヤ', 'や');c.Add('ユ', 'ゆ');c.Add('ヨ', 'よ');
+        c.Add('ラ', 'ら');c.Add('リ', 'り');c.Add('ル', 'る');c.Add('レ', 'れ');c.Add('ロ', 'ろ');
+        c.Add('ワ', 'わ');c.Add('ヲ', 'を');c.Add('ン', 'ん');
+        c.Add('ガ', 'が');c.Add('ギ', 'ぎ');c.Add('グ', 'ぐ');c.Add('ゲ', 'げ');c.Add('ゴ', 'ご');
+        c.Add('ザ', 'ざ');c.Add('ジ', 'じ');c.Add('ズ', 'ず');c.Add('ゼ', 'ぜ');c.Add('ゾ', 'ぞ');
+        c.Add('ダ', 'だ');c.Add('ヂ', 'ぢ');c.Add('ヅ', 'づ');c.Add('デ', 'で');c.Add('ド', 'ど');
+        c.Add('バ', 'ば');c.Add('ビ', 'び');c.Add('ブ', 'ぶ');c.Add('ベ', 'べ');c.Add('ボ', 'ぼ');
+        c.Add('パ', 'ぱ');c.Add('ピ', 'ぴ');c.Add('プ', 'ぷ');c.Add('ペ', 'ぺ');c.Add('ポ', 'ぽ');
+        c.Add('ァ', 'ぉ');c.Add('ィ', 'ぇ');c.Add('ゥ', 'ぅ');c.Add('ェ', 'ぇ');c.Add('ォ', 'ぉ');
+        c.Add('ャ', 'ゃ');c.Add('ュ', 'ゅ');c.Add('ョ', 'ょ');
+        c.Add('ッ', 'っ');c.Add('ヴ', '?');
+        // c.Add('ー', 'ー');
     }
 
     string tt = "";
@@ -60,7 +82,18 @@ public class Voice: MonoBehaviour
         if (tmp != text)
         {
             tmp = text;
-            text = KanjiToKatakana(text);
+            Debug.Log("認識した音声：" + text);
+            string str = "";
+            for(int i=0; i<text.Length; i++)
+            {
+                if(text[i] >= 'ァ' && text[i] <= 'ヴ'){
+                    str += c[text[i]];
+                }else{
+                    str += text[i];
+                }
+            }
+            Debug.Log("認識した音声：" + str);
+            text = KanjiToKatakana(str);
             Debug.Log("認識した音声：" + text);
             voiceFlag = 1;
             voiceText = text;
