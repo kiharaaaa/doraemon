@@ -301,16 +301,17 @@ public class MultiSourceManager : MonoBehaviour
     double Sig(double x, double ss, double tt){
         double s = ss;
         double t = tt;
-        Debug.Log((t-s) / (1.0d + (Math.Exp((x - 4)))) + s);
+        // Debug.Log((t-s) / (1.0d + (Math.Exp((x - 4)))) + s);
         return (t - s) / (1.0d + Math.Exp(-(x - 4))) + s;
     }
 
     void UpdateRotation(){
         Vector3 pos = rectTransform.localPosition;
-        pos.x = -350*(float)pitch;
-        pos.y = -200*(float)roll;
+        pos.x = -600*(float)pitch;
+        pos.y = -400*(float)roll;
 
         rectTransform.localPosition = pos;
+        Debug.Log(pos.x + " " + pos.y);
     }
 
     void OnFaceFrameArrived(object sender, FaceFrameArrivedEventArgs e)
@@ -389,9 +390,7 @@ public class MultiSourceManager : MonoBehaviour
             // pitch = ((n-frame_count)*p_pitch + frame_count*n_pitch) / (float)n;
             // roll = ((n-frame_count)*p_roll + frame_count*n_roll) / (float)n;
 
-            Debug.Log(roll + "2");
             //シグモイド
-            Debug.Log("sigmoid");
             yaw = Sig(frame_count * 8 / (double)n, p_yaw, n_yaw);
             pitch = Sig(frame_count * 8 / (double)n, p_pitch, n_pitch);
             roll = Sig(frame_count * 8 / (double)n, p_roll, n_roll);

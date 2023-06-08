@@ -10,6 +10,8 @@ public class Shot : MonoBehaviour
     public float shotInterval;
     public static string lastMojiTag = "LastMoji";
 
+    public RectTransform rectTransform;
+
     public GameObject A;  // あ
     public GameObject I;  // い
     public GameObject U;  // う
@@ -239,7 +241,12 @@ public class Shot : MonoBehaviour
             }
             else
             {
-                enemyPosition = Input.mousePosition;
+                // enemyPosition = Input.mousePosition;
+                var pos = rectTransform.localPosition;
+                pos.x += 1920 / 2;
+                pos.y += 1080 / 2;
+                enemyPosition = pos;
+
                 enemyPosition.z = 15f;
                 enemyPosition = Camera.main.ScreenToWorldPoint(enemyPosition);
             }
