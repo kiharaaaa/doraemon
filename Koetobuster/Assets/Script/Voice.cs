@@ -1,8 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 using NMeCab.Specialized;
+using System.Text;
 
 public class Voice: MonoBehaviour
 {
@@ -19,48 +20,50 @@ public class Voice: MonoBehaviour
         dictationRecognizer = new DictationRecognizer();
 
         dictationRecognizer.Start();
-        Debug.Log("‰¹º”F¯ŠJn");
+        Debug.Log("éŸ³å£°èªè­˜é–‹å§‹");
 
         voiceFlag = 0;
 
-        c.Add('ƒA', '‚ ');c.Add('ƒC', '‚¢');c.Add('ƒE', '‚¤');c.Add('ƒG', '‚¦');c.Add('ƒI', '‚¨');
-        c.Add('ƒJ', '‚©');c.Add('ƒL', '‚«');c.Add('ƒN', '‚­');c.Add('ƒP', '‚¯');c.Add('ƒR', '‚±');
-        c.Add('ƒT', '‚³');c.Add('ƒV', '‚µ');c.Add('ƒX', '‚·');c.Add('ƒZ', '‚¹');c.Add('ƒ\', '‚»');
-        c.Add('ƒ^', '‚½');c.Add('ƒ`', '‚¿');c.Add('ƒc', '‚Â');c.Add('ƒe', '‚Ä');c.Add('ƒg', '‚Æ');
-        c.Add('ƒi', '‚È');c.Add('ƒj', '‚É');c.Add('ƒk', '‚Ê');c.Add('ƒl', '‚Ë');c.Add('ƒm', '‚Ì');
-        c.Add('ƒn', '‚Í');c.Add('ƒq', '‚Ğ');c.Add('ƒt', '‚Ó');c.Add('ƒw', '‚Ö');c.Add('ƒz', '‚Ù');
-        c.Add('ƒ}', '‚Ü');c.Add('ƒ~', '‚İ');c.Add('ƒ€', '‚Ş');c.Add('ƒ', '‚ß');c.Add('ƒ‚', '‚à');
-        c.Add('ƒ„', '‚â');c.Add('ƒ†', '‚ä');c.Add('ƒˆ', '‚æ');
-        c.Add('ƒ‰', '‚ç');c.Add('ƒŠ', '‚è');c.Add('ƒ‹', '‚é');c.Add('ƒŒ', '‚ê');c.Add('ƒ', '‚ë');
-        c.Add('ƒ', '‚í');c.Add('ƒ’', '‚ğ');c.Add('ƒ“', '‚ñ');
-        c.Add('ƒK', '‚ª');c.Add('ƒM', '‚¬');c.Add('ƒO', '‚®');c.Add('ƒQ', '‚°');c.Add('ƒS', '‚²');
-        c.Add('ƒU', '‚´');c.Add('ƒW', '‚¶');c.Add('ƒY', '‚¸');c.Add('ƒ[', '‚º');c.Add('ƒ]', '‚¼');
-        c.Add('ƒ_', '‚¾');c.Add('ƒa', '‚À');c.Add('ƒd', '‚Ã');c.Add('ƒf', '‚Å');c.Add('ƒh', '‚Ç');
-        c.Add('ƒo', '‚Î');c.Add('ƒr', '‚Ñ');c.Add('ƒu', '‚Ô');c.Add('ƒx', '‚×');c.Add('ƒ{', '‚Ú');
-        c.Add('ƒp', '‚Ï');c.Add('ƒs', '‚Ò');c.Add('ƒv', '‚Õ');c.Add('ƒy', '‚Ø');c.Add('ƒ|', '‚Û');
-        c.Add('ƒ@', '‚§');c.Add('ƒB', '‚¥');c.Add('ƒD', '‚£');c.Add('ƒF', '‚¥');c.Add('ƒH', '‚§');
-        c.Add('ƒƒ', '‚á');c.Add('ƒ…', '‚ã');c.Add('ƒ‡', '‚å');
-        c.Add('ƒb', '‚Á');c.Add('ƒ”', '?');
-        // c.Add('[', '[');
+        c.Add('ã‚¢', 'ã‚');c.Add('ã‚¤', 'ã„');c.Add('ã‚¦', 'ã†');c.Add('ã‚¨', 'ãˆ');c.Add('ã‚ª', 'ãŠ');
+        c.Add('ã‚«', 'ã‹');c.Add('ã‚­', 'ã');c.Add('ã‚¯', 'ã');c.Add('ã‚±', 'ã‘');c.Add('ã‚³', 'ã“');
+        c.Add('ã‚µ', 'ã•');c.Add('ã‚·', 'ã—');c.Add('ã‚¹', 'ã™');c.Add('ã‚»', 'ã›');c.Add('ã‚½', 'ã');
+        c.Add('ã‚¿', 'ãŸ');c.Add('ãƒ', 'ã¡');c.Add('ãƒ„', 'ã¤');c.Add('ãƒ†', 'ã¦');c.Add('ãƒˆ', 'ã¨');
+        c.Add('ãƒŠ', 'ãª');c.Add('ãƒ‹', 'ã«');c.Add('ãƒŒ', 'ã¬');c.Add('ãƒ', 'ã­');c.Add('ãƒ', 'ã®');
+        c.Add('ãƒ', 'ã¯');c.Add('ãƒ’', 'ã²');c.Add('ãƒ•', 'ãµ');c.Add('ãƒ˜', 'ã¸');c.Add('ãƒ›', 'ã»');
+        c.Add('ãƒ', 'ã¾');c.Add('ãƒŸ', 'ã¿');c.Add('ãƒ ', 'ã‚€');c.Add('ãƒ¡', 'ã‚');c.Add('ãƒ¢', 'ã‚‚');
+        c.Add('ãƒ¤', 'ã‚„');c.Add('ãƒ¦', 'ã‚†');c.Add('ãƒ¨', 'ã‚ˆ');
+        c.Add('ãƒ©', 'ã‚‰');c.Add('ãƒª', 'ã‚Š');c.Add('ãƒ«', 'ã‚‹');c.Add('ãƒ¬', 'ã‚Œ');c.Add('ãƒ­', 'ã‚');
+        c.Add('ãƒ¯', 'ã‚');c.Add('ãƒ²', 'ã‚’');c.Add('ãƒ³', 'ã‚“');
+        c.Add('ã‚¬', 'ãŒ');c.Add('ã‚®', 'ã');c.Add('ã‚°', 'ã');c.Add('ã‚²', 'ã’');c.Add('ã‚´', 'ã”');
+        c.Add('ã‚¶', 'ã–');c.Add('ã‚¸', 'ã˜');c.Add('ã‚º', 'ãš');c.Add('ã‚¼', 'ãœ');c.Add('ã‚¾', 'ã');
+        c.Add('ãƒ€', 'ã ');c.Add('ãƒ‚', 'ã¢');c.Add('ãƒ…', 'ã¥');c.Add('ãƒ‡', 'ã§');c.Add('ãƒ‰', 'ã©');
+        c.Add('ãƒ', 'ã°');c.Add('ãƒ“', 'ã³');c.Add('ãƒ–', 'ã¶');c.Add('ãƒ™', 'ã¹');c.Add('ãƒœ', 'ã¼');
+        c.Add('ãƒ‘', 'ã±');c.Add('ãƒ”', 'ã´');c.Add('ãƒ—', 'ã·');c.Add('ãƒš', 'ãº');c.Add('ãƒ', 'ã½');
+        c.Add('ã‚¡', 'ã‰');c.Add('ã‚£', 'ã‡');c.Add('ã‚¥', 'ã…');c.Add('ã‚§', 'ã‡');c.Add('ã‚©', 'ã‰');
+        c.Add('ãƒ£', 'ã‚ƒ');c.Add('ãƒ¥', 'ã‚…');c.Add('ãƒ§', 'ã‚‡');
+        c.Add('ãƒƒ', 'ã£');c.Add('ãƒ´', 'ã‚”');c.Add('ãƒ¼', 'ãƒ¼');
     }
 
-    string tt = "";
+    string status = "";
     void Update()
-    {        
-        if (tt != dictationRecognizer.Status.ToString())
+    {
+        // status ãŒå‰å›ã¨é•ã£ãŸã‚‰
+        if (status != dictationRecognizer.Status.ToString())
         {
             Debug.Log(dictationRecognizer.Status);
-            tt = dictationRecognizer.Status.ToString();
+            status = dictationRecognizer.Status.ToString();
         }
-            if (voiceFlag == 0)
+
+        // å–‹ã£ãŸã¨ã
+        if (voiceFlag == 0)
         {
-            dictationRecognizer.DictationResult += DictationRecognizer_DictationResult;         //‰¹º”F¯Š®—¹‚µ‚½‚ço—Í
+            dictationRecognizer.DictationResult += DictationRecognizer_DictationResult;         //éŸ³å£°èªè­˜å®Œäº†ã—ãŸã‚‰å‡ºåŠ›
         }
     }
 
-    string KanjiToKatakana(string sentence)  // Š¿š‚ğƒJƒ^ƒJƒi‚É•ÏŠ·
+    string KanjiToKatakana(string sentence)  // æ¼¢å­—ã‚’ã‚«ã‚¿ã‚«ãƒŠã«å¤‰æ›
     {
-        // udic/ipadicƒtƒHƒ‹ƒ_v‚ÌƒpƒX‚ğw’è‚·‚é
+        // ã€Œdic/ipadicãƒ•ã‚©ãƒ«ãƒ€ã€ã®ãƒ‘ã‚¹ã‚’æŒ‡å®šã™ã‚‹
         var dicDir = @"Assets/dic/ipadic";
 
         string ans = "";
@@ -77,24 +80,34 @@ public class Voice: MonoBehaviour
 
     }
 
-    private void DictationRecognizer_DictationResult(string text, ConfidenceLevel confidence)
+    string KatakanaToHiragana(string text) // ã‚«ã‚¿ã‚«ãƒŠã‚’ã²ã‚‰ãŒãªã«å¤‰æ›
+    {
+        StringBuilder builder = new StringBuilder();
+        char beginHiragana = 'ã';
+        // char endHiragana = 'ã‚–';
+        char beginKatakana = 'ã‚¡';
+        char endKatakana = 'ãƒ¶';
+        int offset = beginKatakana - beginHiragana;
+
+        foreach (var c in text)
+        {
+            builder.Append(
+                beginKatakana <= c && c <= endKatakana ?
+                    (char)(c - offset) :
+                    c
+            );
+        }
+        return builder.ToString();
+    }
+
+    void DictationRecognizer_DictationResult(string text, ConfidenceLevel confidence)
     {
         if (tmp != text)
         {
             tmp = text;
-            Debug.Log("”F¯‚µ‚½‰¹ºF" + text);
-            string str = "";
-            for(int i=0; i<text.Length; i++)
-            {
-                if(text[i] >= 'ƒ@' && text[i] <= 'ƒ”'){
-                    str += c[text[i]];
-                }else{
-                    str += text[i];
-                }
-            }
-            Debug.Log("”F¯‚µ‚½‰¹ºF" + str);
-            text = KanjiToKatakana(str);
-            Debug.Log("”F¯‚µ‚½‰¹ºF" + text);
+            text = KatakanaToHiragana(text);
+            text = KanjiToKatakana(text);
+            Debug.Log("èªè­˜ã—ãŸéŸ³å£°3ï¼š" + text);
             voiceFlag = 1;
             voiceText = text;
         }
