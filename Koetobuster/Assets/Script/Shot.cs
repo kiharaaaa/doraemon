@@ -225,8 +225,13 @@ public class Shot : MonoBehaviour
     int flag = 0;
     void Update()
     {
+        var pos = rectTransform.localPosition;
+        pos.x = Input.mousePosition.x - 1920/2;
+        pos.y = Input.mousePosition.y - 1080/2;
+        rectTransform.localPosition = pos;
+
         if(Voice.voiceFlag == 1)
-        //if (Input.GetMouseButtonDown(0))
+        // if (Input.GetMouseButtonDown(0))
         {
             Voice.voiceFlag = 2;
 
@@ -241,11 +246,12 @@ public class Shot : MonoBehaviour
             }
             else
             {
-                // enemyPosition = Input.mousePosition;
-                var pos = rectTransform.localPosition;
-                pos.x += 1920 / 2;
-                pos.y += 1080 / 2;
-                enemyPosition = pos;
+                // var pos = rectTransform.localPosition;
+                // pos.x += 1920 / 2;
+                // pos.y += 1080 / 2;
+                // enemyPosition = pos;
+
+                enemyPosition = Input.mousePosition;
 
                 enemyPosition.z = 15f;
                 enemyPosition = Camera.main.ScreenToWorldPoint(enemyPosition);
