@@ -116,6 +116,10 @@ public class Shot : MonoBehaviour
 
     Dictionary<char, GameObject> myTable = new Dictionary<char, GameObject>();
 
+    int framecount = 0;
+    int framemod = 40;
+    Vector3 npos = new Vector3(0, 0, 0), ppos;
+
     void Start()
     {
         myTable.Add('ア', A);
@@ -223,10 +227,37 @@ public class Shot : MonoBehaviour
     int cnt;
     int n;
     int flag = 0;
+
+    double Sig(double x, double s, double t){
+        // Debug.Log((t-s) / (1.0d + (Math.Exp((x - 4)))) + s);
+        return (t - s) / (1.0d + Math.Exp(-(8*x - 4))) + s;
+    }
+
     void Update()
     {
+        var pos = rectTransform.localPosition;
+        
+        if(framecount % framemod == 0){       
+            pos.x = Input.mousePosition.x - 1920/2;
+            pos.y = Input.mousePosition.y - 1080/2;
+            rectTransform.localPosition = pos;
+
+            ppos = npos;
+            npos = pos;
+        }else{
+            pos.x = (float)Sig(framecount / (double)framemod, ppos.x, npos.x);
+            pos.y = (float)Sig(framecount / (double)framemod, ppos.y, npos.y);
+            rectTransform.localPosition = pos;
+        }
+
+        framecount = (framecount + 1) % framemod;
+
+
+
+
+
         if(Voice.voiceFlag == 1)
-        //if (Input.GetMouseButtonDown(0))
+        // if (Input.GetMouseButtonDown(0))
         {
             Voice.voiceFlag = 2;
 
@@ -241,11 +272,12 @@ public class Shot : MonoBehaviour
             }
             else
             {
-                // enemyPosition = Input.mousePosition;
-                var pos = rectTransform.localPosition;
-                pos.x += 1920 / 2;
-                pos.y += 1080 / 2;
-                enemyPosition = pos;
+                // var pos = rectTransform.localPosition;
+                // pos.x += 1920 / 2;
+                // pos.y += 1080 / 2;
+                // enemyPosition = pos;
+
+                enemyPosition = Input.mousePosition;
 
                 enemyPosition.z = 15f;
                 enemyPosition = Camera.main.ScreenToWorldPoint(enemyPosition);
