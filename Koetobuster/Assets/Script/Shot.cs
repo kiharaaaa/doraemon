@@ -11,6 +11,14 @@ public class Shot : MonoBehaviour
     public static string lastMojiTag = "LastMoji";
 
     public RectTransform rectTransform;
+    public RectTransform rectTransform2;
+    public RectTransform rectTransform3;
+    public RectTransform rectTransform4;
+
+    public GameObject aim1;
+    public GameObject aim2;
+    public GameObject aim3;
+    public GameObject aim4;
 
     public GameObject A;  // あ
     public GameObject I;  // い
@@ -119,6 +127,9 @@ public class Shot : MonoBehaviour
     int framecount = 0;
     int framemod = 40;
     Vector3 npos = new Vector3(0, 0, 0), ppos;
+    float currentDisplay = 0;
+
+    public UnityEngine.UI.Text unkotext;
 
     void Start()
     {
@@ -221,6 +232,11 @@ public class Shot : MonoBehaviour
 
         myTable.Add('ヴ', VU);
         myTable.Add('ー', haihun);
+
+        // aim1.SetActive(false);
+        // aim2.SetActive(false);
+        // aim3.SetActive(false);
+        // aim4.SetActive(false);
 }
 
     float time;
@@ -235,22 +251,56 @@ public class Shot : MonoBehaviour
 
     void Update()
     {
-        var pos = rectTransform.localPosition;
-        
-        if(framecount % framemod == 0){       
-            pos.x = Input.mousePosition.x - 1920/2;
-            pos.y = Input.mousePosition.y - 1080/2;
-            rectTransform.localPosition = pos;
+        // var mousePos = Display.RelativeMouseAt (Input.mousePosition);
+        // var pos = rectTransform.localPosition;
 
-            ppos = npos;
-            npos = pos;
-        }else{
-            pos.x = (float)Sig(framecount / (double)framemod, ppos.x, npos.x);
-            pos.y = (float)Sig(framecount / (double)framemod, ppos.y, npos.y);
-            rectTransform.localPosition = pos;
-        }
+        // unkotext.text = mousePos.x.ToString() + " " + mousePos.y.ToString();
 
-        framecount = (framecount + 1) % framemod;
+        // if(currentDisplay != mousePos.z){
+        //     currentDisplay = mousePos.z;
+        //     if(mousePos.z == 0){
+        //         aim1.SetActive(true);
+        //         aim2.SetActive(false);
+        //         aim3.SetActive(false);
+        //         aim4.SetActive(false);
+        //     }else if(mousePos.z == 1){
+        //         aim1.SetActive(false);
+        //         aim2.SetActive(true);
+        //         aim3.SetActive(false);
+        //         aim4.SetActive(false);
+        //     }else if(mousePos.z == 2){
+        //         aim1.SetActive(false);
+        //         aim2.SetActive(false);
+        //         aim3.SetActive(true);
+        //         aim4.SetActive(false);
+        //     }else if(mousePos.z == 3){
+        //         aim1.SetActive(false);
+        //         aim2.SetActive(false);
+        //         aim3.SetActive(false);
+        //         aim4.SetActive(true);
+        //     }
+        // }
+
+        // if(framecount % framemod == 0){       
+        //     pos.x = mousePos.x - 3840/2;
+        //     pos.y = mousePos.y - 1080/2;
+        //     rectTransform.localPosition = npos;
+        //     rectTransform2.localPosition = npos;
+        //     rectTransform3.localPosition = npos;
+        //     rectTransform4.localPosition = npos;
+
+        //     ppos = npos;
+        //     npos = pos;
+        // }else{
+        //     pos.x = (float)Sig(framecount / (double)framemod, ppos.x, npos.x);
+        //     pos.y = (float)Sig(framecount / (double)framemod, ppos.y, npos.y);
+        //     rectTransform.localPosition = pos;
+        //     rectTransform2.localPosition = pos;
+        //     rectTransform3.localPosition = pos;
+        //     rectTransform4.localPosition = pos;
+        // }
+
+        // framecount = (framecount + 1) % framemod;
 
 
 
@@ -272,12 +322,12 @@ public class Shot : MonoBehaviour
             }
             else
             {
-                // var pos = rectTransform.localPosition;
-                // pos.x += 1920 / 2;
-                // pos.y += 1080 / 2;
-                // enemyPosition = pos;
+                var pos = rectTransform.localPosition;
+                pos.x += 1920 / 2;
+                pos.y += 1080 / 2;
+                enemyPosition = pos;
 
-                enemyPosition = Input.mousePosition;
+                // enemyPosition = mousePos;
 
                 enemyPosition.z = 15f;
                 enemyPosition = Camera.main.ScreenToWorldPoint(enemyPosition);

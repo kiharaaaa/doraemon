@@ -5,7 +5,7 @@ using Windows.Kinect;
 using Microsoft.Kinect;
 using Microsoft.Kinect.Face;
 
-public class MultiSourceManager : MonoBehaviour
+public class MultiSourceManager1 : MonoBehaviour
 {
     //    public int ColorWidth { get; private set; }
     //    public int ColorHeight { get; private set; }
@@ -121,11 +121,7 @@ public class MultiSourceManager : MonoBehaviour
     public static double n_yaw, n_pitch, n_roll;
     public static double p_yaw, p_pitch, p_roll;
 
-    public RectTransform rectTransform;
-    public RectTransform rectTransform2;
-    public RectTransform rectTransform3;
-    public RectTransform rectTransform4;
-
+    RectTransform rectTransform;
     private FaceFrameFeatures DefaultFaceFrameFeatures = FaceFrameFeatures.PointsInColorSpace
                                         | FaceFrameFeatures.Happy
                                         | FaceFrameFeatures.FaceEngagement
@@ -136,13 +132,11 @@ public class MultiSourceManager : MonoBehaviour
                                         | FaceFrameFeatures.MouthMoved
                                         | FaceFrameFeatures.LookingAway
                                         | FaceFrameFeatures.RotationOrientation;
-    
-    public UnityEngine.UI.Text debugText;
+
 
     void Start()
     {
         _Sensor = KinectSensor.GetDefault();
-        
         if (_Sensor != null)
         {
             if (!_Sensor.IsOpen)
@@ -177,6 +171,7 @@ public class MultiSourceManager : MonoBehaviour
         n = 25;
         frame_count = 0;
         tmp = 0;
+        rectTransform = gameObject.GetComponent<RectTransform>();
     }
 
     void Update()
@@ -185,13 +180,11 @@ public class MultiSourceManager : MonoBehaviour
             return;
         }
 
-        if(bodyReader != null){
-            Debug.Log("bodyreader is null.");
-        }
-
         using (var bodyFrame = bodyReader.AcquireLatestFrame()) {
             if (bodyFrame != null) {
                 bodyFrame.GetAndRefreshBodyData (bodies);
+
+                Debug.Log("bodyframearrived");
 
                 for (int i = 0; i < bodyCount; i++)
                 {
@@ -323,20 +316,16 @@ public class MultiSourceManager : MonoBehaviour
     void UpdateRotation(){
         float X = -600*(float)pitch;
         float Y = -400*(float)roll;
-        Vector3 pos = new Vector3(); 
+        Vector3 pos = rectTransform.localPosition;
 
         pos.x = X;
         pos.y = Y;
         rectTransform.localPosition = pos;
-        rectTransform2.localPosition = pos;
-        rectTransform3.localPosition = pos;
-        rectTransform4.localPosition = pos;
     }
 
     void OnFaceFrameArrived(object sender, FaceFrameArrivedEventArgs e)
     {
-        // debugText.text = "yaw=" + yaw.ToString() + ", pitch=" + pitch.ToString();
-        debugText.text = "faceframe arrived";
+        Debug.Log("faceframearrived");
         // Debug.Log(yaw + " " + pitch + " " + roll);
         // Debug.Log(n_yaw + " " + p_yaw);
         tmp++;
