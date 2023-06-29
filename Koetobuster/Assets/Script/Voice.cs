@@ -107,7 +107,7 @@ public class Voice: MonoBehaviour
             tmp = text;
             text = KatakanaToHiragana(text);
             text = KanjiToKatakana(text);
-            Debug.Log("認識した音声3：" + text);
+            Debug.Log("認識した音声：" + text);
             voiceFlag = 1;
             voiceText = text;
         }

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject target;
-    public float speed;
+    public GameObject Player;
+    public int HP = 3;
+    bool flag = false;
+    public static bool attack = true;
 
     Material beforeMaterial;
     public Material afterMaterial;
@@ -17,15 +19,17 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position, Vector3.up);
-        transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, 0.1f);
-        Vector3 p = new Vector3(0f, 0f, speed);
-
-        transform.Translate(p);
+        transform.position = new Vector3(transform.position.x, transform.position.y, Player.transform.position.z + 15);
     }
 
     void OnTriggerEnter(Collider collider)
     {
-        GetComponent<MeshRenderer>().material = afterMaterial;
+        if (collider.gameObject.tag == HP.ToString())
+        {
+            flag = true;
+            attack = true;
+        }
+
+        if(flag) GetComponent<MeshRenderer>().material = afterMaterial;
     }
 }

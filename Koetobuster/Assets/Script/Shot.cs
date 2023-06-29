@@ -10,6 +10,7 @@ public class Shot : MonoBehaviour
     public float shotInterval;
     public static string lastMojiTag = "LastMoji";
 
+    /*
     public RectTransform rectTransform;
     public RectTransform rectTransform2;
     public RectTransform rectTransform3;
@@ -19,6 +20,7 @@ public class Shot : MonoBehaviour
     public GameObject aim2;
     public GameObject aim3;
     public GameObject aim4;
+    */
 
     public GameObject A;  // あ
     public GameObject I;  // い
@@ -124,12 +126,10 @@ public class Shot : MonoBehaviour
 
     Dictionary<char, GameObject> myTable = new Dictionary<char, GameObject>();
 
-    int framecount = 0;
-    int framemod = 40;
     Vector3 npos = new Vector3(0, 0, 0), ppos;
     float currentDisplay = 0;
 
-    public UnityEngine.UI.Text unkotext;
+    // public UnityEngine.UI.Text unkotext;
 
     void Start()
     {
@@ -251,63 +251,7 @@ public class Shot : MonoBehaviour
 
     void Update()
     {
-        // var mousePos = Display.RelativeMouseAt (Input.mousePosition);
-        // var pos = rectTransform.localPosition;
-
-        // unkotext.text = mousePos.x.ToString() + " " + mousePos.y.ToString();
-
-        // if(currentDisplay != mousePos.z){
-        //     currentDisplay = mousePos.z;
-        //     if(mousePos.z == 0){
-        //         aim1.SetActive(true);
-        //         aim2.SetActive(false);
-        //         aim3.SetActive(false);
-        //         aim4.SetActive(false);
-        //     }else if(mousePos.z == 1){
-        //         aim1.SetActive(false);
-        //         aim2.SetActive(true);
-        //         aim3.SetActive(false);
-        //         aim4.SetActive(false);
-        //     }else if(mousePos.z == 2){
-        //         aim1.SetActive(false);
-        //         aim2.SetActive(false);
-        //         aim3.SetActive(true);
-        //         aim4.SetActive(false);
-        //     }else if(mousePos.z == 3){
-        //         aim1.SetActive(false);
-        //         aim2.SetActive(false);
-        //         aim3.SetActive(false);
-        //         aim4.SetActive(true);
-        //     }
-        // }
-
-        // if(framecount % framemod == 0){       
-        //     pos.x = mousePos.x - 3840/2;
-        //     pos.y = mousePos.y - 1080/2;
-        //     rectTransform.localPosition = npos;
-        //     rectTransform2.localPosition = npos;
-        //     rectTransform3.localPosition = npos;
-        //     rectTransform4.localPosition = npos;
-
-        //     ppos = npos;
-        //     npos = pos;
-        // }else{
-        //     pos.x = (float)Sig(framecount / (double)framemod, ppos.x, npos.x);
-        //     pos.y = (float)Sig(framecount / (double)framemod, ppos.y, npos.y);
-        //     rectTransform.localPosition = pos;
-        //     rectTransform2.localPosition = pos;
-        //     rectTransform3.localPosition = pos;
-        //     rectTransform4.localPosition = pos;
-        // }
-
-        // framecount = (framecount + 1) % framemod;
-
-
-
-
-
         if(Voice.voiceFlag == 1)
-        // if (Input.GetMouseButtonDown(0))
         {
             Voice.voiceFlag = 2;
 
@@ -322,23 +266,18 @@ public class Shot : MonoBehaviour
             }
             else
             {
-                var pos = rectTransform.localPosition;
-                pos.x += 1920 / 2;
-                pos.y += 1080 / 2;
-                enemyPosition = pos;
+                enemyPosition = Input.mousePosition;
 
-                // enemyPosition = mousePos;
-
-                enemyPosition.z = 15f;
+                enemyPosition.z += 15f;
                 enemyPosition = Camera.main.ScreenToWorldPoint(enemyPosition);
             }
             float px = playerPosition.x;
             float py = playerPosition.y;
-            float pz = playerPosition.z;
+            float pz = playerPosition.z + 3f;
 
             float ex = enemyPosition.x;
             float ey = enemyPosition.y;
-            float ez = enemyPosition.z;
+            float ez = enemyPosition.z + 3f;
 
             Vector3 angle_y_from = Vector3.forward;
             Vector3 angle_y_to = new Vector3(ex - px, 0f, ez - pz);
@@ -371,6 +310,10 @@ public class Shot : MonoBehaviour
 
                 time = 0;
                 cnt++;
+                if (cnt == 1)
+                {
+                    c.tag = Voice.voiceText.Length.ToString();
+                }
                 if (cnt == n)
                 {
                     flag = 0;

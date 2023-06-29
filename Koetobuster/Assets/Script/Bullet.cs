@@ -24,8 +24,16 @@ public class Bullet : MonoBehaviour
         {
             if (gameObject.tag == Shot.lastMojiTag)
             {
-                Destroy(collider.gameObject);
-                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                if (Enemy.attack)
+                {
+                    Destroy(collider.gameObject);
+                    Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                    Enemy.attack = false;
+                }
+            }
+            else
+            {
+                // バリアのエフェクト
             }
             Destroy(gameObject);
         }
