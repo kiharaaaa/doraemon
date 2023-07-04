@@ -7,7 +7,7 @@ using System.Text;
 
 public class Voice: MonoBehaviour
 {
-    public static int voiceFlag;
+    public static int voiceFlag = -1;
     public static string voiceText;
 
     Dictionary<char, char> c = new Dictionary<char, char>();
@@ -52,6 +52,11 @@ public class Voice: MonoBehaviour
         {
             Debug.Log(dictationRecognizer.Status);
             status = dictationRecognizer.Status.ToString();
+
+            if(status == "Stopped")
+            {
+                dictationRecognizer.Start();
+            }
         }
 
         // 喋ったとき
@@ -108,8 +113,11 @@ public class Voice: MonoBehaviour
             text = KatakanaToHiragana(text);
             text = KanjiToKatakana(text);
             Debug.Log("認識した音声：" + text);
-            voiceFlag = 1;
-            voiceText = text;
+            if(text.Length != 1)
+            {
+                voiceFlag = 1;
+                voiceText = text;
+            }
         }
     }
 }

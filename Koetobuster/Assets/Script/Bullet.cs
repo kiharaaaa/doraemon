@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public GameObject explosionPrefab;
     float z;
+
     void Start()
     {
         z = gameObject.transform.position.z;
@@ -30,11 +31,12 @@ public class Bullet : MonoBehaviour
                     Instantiate(explosionPrefab, transform.position, Quaternion.identity);
                     Enemy.attack = false;
                 }
+                else
+                {
+                    Barrier.barrierFlag = true;
+                }
             }
-            else
-            {
-                // バリアのエフェクト
-            }
+            //Enemy.HP2--;
             Destroy(gameObject);
         }
     }

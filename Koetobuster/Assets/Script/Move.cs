@@ -7,9 +7,9 @@ public class Move : MonoBehaviour
 
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform endPoint;
-    [SerializeField] private float MoveSpeed = 3.0f;
+    public static float MoveSpeed = 0.8f;
 
-    private int direction = -1;
+    private int direction = 1;
 
     void FixedUpdate()
     {
