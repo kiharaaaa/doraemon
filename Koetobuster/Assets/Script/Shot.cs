@@ -9,6 +9,7 @@ public class Shot : MonoBehaviour
     public GameObject Player;
     public float shotInterval;
     public static string lastMojiTag = "LastMoji";
+    public static bool shotSound;
 
     /*
     public RectTransform rectTransform;
@@ -133,6 +134,8 @@ public class Shot : MonoBehaviour
 
     void Start()
     {
+        shotSound = false; ;
+
         myTable.Add('ア', A);
         myTable.Add('イ', I);
         myTable.Add('ウ', U);
@@ -294,6 +297,7 @@ public class Shot : MonoBehaviour
             time = 0;
             cnt = 0;
             n = Voice.voiceText.Length;
+            shotSound = true;
         }
 
         if (flag == 1)
@@ -318,7 +322,7 @@ public class Shot : MonoBehaviour
                 {
                     flag = 0;
                     c.tag = lastMojiTag;
-                    Voice.voiceFlag = 0;
+                    //Voice.voiceFlag = 0;
                     Voice.voiceText = "";
                 }
             }

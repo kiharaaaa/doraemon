@@ -19,6 +19,10 @@ public class Enemy : MonoBehaviour
     public int start_sec = 0, display_sec = 10; // スタートから何秒後に画面に入るか、何秒間画面に表示するか
     int delta_x, delta_y;                       // 移動開始地点と終了ってんのx,y座標の差
 
+    public static bool attackSound;
+    public static bool barrierSound;
+    GameObject b;
+
     void Start()
     {
         delta_x = end_x - start_x; delta_y = end_y - start_y;
@@ -26,6 +30,7 @@ public class Enemy : MonoBehaviour
         var rotation = Quaternion.LookRotation(delta, Vector3.up);
         this.transform.rotation = rotation;
         HPText.GetComponent<TextMesh>().text = HP.ToString();
+        barrierSound = false;
     }
 
     void Update()
@@ -60,7 +65,10 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        
+        if (b)
+        {
+            b.transform.position = transform.position;
+        }
     }
 
     void OnTriggerEnter(Collider collider)
@@ -73,8 +81,18 @@ public class Enemy : MonoBehaviour
         }
         else if (!(flag) && barrierCnt == 0)
         {
-            Instantiate(barrierPrefab, transform.position, Quaternion.identity);
+            b = Instantiate(barrierPrefab, transform.position, Quaternion.identity) as GameObject;
             barrierCnt++;
         }
+
+        if (attack)
+        {
+            attackSound = true;
+        }
+        else
+        {
+            barrierSound = true;
+        }
+
     }
 }

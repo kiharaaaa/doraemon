@@ -9,6 +9,8 @@ public class Voice: MonoBehaviour
 {
     public static int voiceFlag = -1;
     public static string voiceText;
+    public GameObject charge;
+    public GameObject buster;
 
     Dictionary<char, char> c = new Dictionary<char, char>();
 
@@ -17,6 +19,8 @@ public class Voice: MonoBehaviour
 
     void Start()
     {
+        charge.gameObject.SetActive(true);
+        buster.gameObject.SetActive(false);
         dictationRecognizer = new DictationRecognizer();
 
         dictationRecognizer.Start();
@@ -59,9 +63,10 @@ public class Voice: MonoBehaviour
             }
         }
 
-        // 喋ったとき
         if (voiceFlag == 0)
         {
+            charge.gameObject.SetActive(true);
+            buster.gameObject.SetActive(false);
             dictationRecognizer.DictationResult += DictationRecognizer_DictationResult;         //音声認識完了したら出力
         }
     }
@@ -113,7 +118,10 @@ public class Voice: MonoBehaviour
             text = KatakanaToHiragana(text);
             text = KanjiToKatakana(text);
             Debug.Log("認識した音声：" + text);
-            if(text.Length != 1)
+            charge.gameObject.SetActive(false);
+            buster.gameObject.SetActive(true);
+
+            if (text.Length != 1)
             {
                 voiceFlag = 1;
                 voiceText = text;

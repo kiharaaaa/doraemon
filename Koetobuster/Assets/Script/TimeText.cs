@@ -5,15 +5,21 @@ using UnityEngine.UI;
 
 public class TimeText : MonoBehaviour
 {
-    public int second;
-
     void Start()
     {
-        gameObject.GetComponent<Text>().text = "Time: 60s";
+        gameObject.GetComponent<Text>().text = "6   ";
     }
 
     void Update()
     {
-        gameObject.GetComponent<Text>().text = "Time: " + Mathf.Floor(60.0f - Time.time).ToString() + "s";
+        float x = Mathf.Floor(61.0f - Time.time);
+        if(x >= 0)
+        {
+            gameObject.GetComponent<Text>().text = x.ToString();
+        }
+        else
+        {
+            GameEnd.end = true;
+        }
     }
 }
