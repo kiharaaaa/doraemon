@@ -10,6 +10,10 @@ public class Shot : MonoBehaviour
     public float shotInterval;
     public static string lastMojiTag = "LastMoji";
     public static bool shotSound;
+    public Camera camera0;
+    public Camera camera1;
+    public Camera camera2;
+    public Camera camera3;
 
     /*
     public RectTransform rectTransform;
@@ -257,18 +261,26 @@ public class Shot : MonoBehaviour
         if(Voice.voiceFlag == 1)
         {
             Voice.voiceFlag = 2;
+            currentDisplay = Input.mousePosition.z;
+            Ray ray;
+            if (currentDisplay == 0)      ray = camera0.ScreenPointToRay(Input.mousePosition);
+            else if (currentDisplay == 1) ray = camera1.ScreenPointToRay(Input.mousePosition);
+            else if (currentDisplay == 2) ray = camera2.ScreenPointToRay(Input.mousePosition);
+            else ray = camera3.ScreenPointToRay(Input.mousePosition);
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Vector3 playerPosition = Player.transform.position;
             Vector3 enemyPosition;
 
             if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Enemy"))
             {
+                Debug.Log("ok");
                 enemyPosition = hit.collider.gameObject.transform.position;
             }
             else
             {
+                Debug.Log("ng");
                 enemyPosition = Input.mousePosition;
 
                 enemyPosition.z += 15f;

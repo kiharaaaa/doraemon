@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7d13f16e917dfe8489e4125ea9c7975e
+guid: 2139d655cf05bf341baaf9254e527dd4
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Quantum
+  - Let's go Digital
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

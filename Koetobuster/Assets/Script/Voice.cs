@@ -9,6 +9,7 @@ public class Voice: MonoBehaviour
 {
     public static int voiceFlag = -1;
     public static string voiceText;
+    public GameObject normal;
     public GameObject charge;
     public GameObject buster;
 
@@ -16,12 +17,16 @@ public class Voice: MonoBehaviour
 
     DictationRecognizer dictationRecognizer;
     string tmp;
+    bool soundFlag, busterFlag;
 
     void Start()
     {
-        charge.gameObject.SetActive(true);
+        normal.gameObject.SetActive(true);
+        charge.gameObject.SetActive(false);
         buster.gameObject.SetActive(false);
         dictationRecognizer = new DictationRecognizer();
+        soundFlag = false;
+        busterFlag = false;
 
         dictationRecognizer.Start();
         Debug.Log("音声認識開始");
@@ -65,9 +70,30 @@ public class Voice: MonoBehaviour
 
         if (voiceFlag == 0)
         {
-            charge.gameObject.SetActive(true);
-            buster.gameObject.SetActive(false);
+            if (mic.isSound) {
+                normal.gameObject.SetActive(false);
+                charge.gameObject.SetActive(true);
+                buster.gameObject.SetActive(false);
+            }
+            else
+            {
+                normal.gameObject.SetActive(true);
+                charge.gameObject.SetActive(false);
+                buster.gameObject.SetActive(false);
+            }
             dictationRecognizer.DictationResult += DictationRecognizer_DictationResult;         //音声認識完了したら出力
+        }
+        else
+        {
+            tmp = "";
+            //soundFlag = false;
+
+            if (busterFlag)
+            {
+                normal.gameObject.SetActive(false);
+                charge.gameObject.SetActive(false);
+                buster.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -118,8 +144,7 @@ public class Voice: MonoBehaviour
             text = KatakanaToHiragana(text);
             text = KanjiToKatakana(text);
             Debug.Log("認識した音声：" + text);
-            charge.gameObject.SetActive(false);
-            buster.gameObject.SetActive(true);
+            busterFlag = true;
 
             if (text.Length != 1)
             {

@@ -18,6 +18,11 @@ public class Timer : MonoBehaviour
     {
         seconds += Time.deltaTime;
         float timer = seconds / timerLimit;
+        if(seconds >= timerLimit)
+        {
+            GameEnd.end = true;
+            return timer;
+        }
 
         return timer;
     }
