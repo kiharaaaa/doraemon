@@ -261,8 +261,10 @@ public class Shot : MonoBehaviour
         if(Voice.voiceFlag == 1)
         {
             Voice.voiceFlag = 2;
-            currentDisplay = Input.mousePosition.z;
             Ray ray;
+
+            //-----mouse controll-----//
+            currentDisplay = Input.mousePosition.z;
             if (currentDisplay == 0)      ray = camera0.ScreenPointToRay(Input.mousePosition);
             else if (currentDisplay == 1) ray = camera1.ScreenPointToRay(Input.mousePosition);
             else if (currentDisplay == 2) ray = camera2.ScreenPointToRay(Input.mousePosition);
