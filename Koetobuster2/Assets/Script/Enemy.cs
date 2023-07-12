@@ -13,14 +13,14 @@ public class Enemy : MonoBehaviour
     public GameObject barrierPrefab;
     public static int barrierCnt = 0;
     public GameObject HPText;
-    public int idx = 0;  // ¶ã¨‰Eã¨¶‰º¨‰E‰º‚Ì‡‚É 0`8
+    public int idx = 0;  // ï¿½ï¿½ï¿½ã¨ï¿½Eï¿½ã¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ 0ï¿½`8
 
     int[] start_x = { -60, -20,  20,  60, -60, -20,  20,  60 };
     int[] start_y = {  60,  40,  40,  60, -60, -40, -40, -60 };
-    int[] end_x   = { -25, -10, 10, 25, -25, -10, 10, 25 };
-    int[] end_y   = { 10, 10, 10, 10, -10, -10, -10, -10 };
-    public int start_sec = 0, display_sec = 10; // ƒXƒ^[ƒg‚©‚ç‰½•bŒã‚É‰æ–Ê‚É“ü‚é‚©A‰½•bŠÔ‰æ–Ê‚É•\¦‚·‚é‚©
-    int delta_x, delta_y;                       // ˆÚ“®ŠJn’n“_‚ÆI—¹‚Á‚Ä‚ñ‚Ìx,yÀ•W‚Ì·
+    float[] end_x   = { -25f, -8f, 8f, 25f, -25f, -8f, 8f, 25f };
+    float[] end_y   = { 10f, 9.8f, 9.8f, 10f, -10f, -9.8f, -9.8f, -10f };
+    public int start_sec = 0, display_sec = 10; // ï¿½Xï¿½^ï¿½[ï¿½gï¿½ï¿½ï¿½ç‰½ï¿½bï¿½ï¿½É‰ï¿½Ê‚É“ï¿½ï¿½é‚©ï¿½Aï¿½ï¿½ï¿½bï¿½Ô‰ï¿½Ê‚É•\ï¿½ï¿½ï¿½ï¿½ï¿½é‚©
+    float delta_x, delta_y;                       // ï¿½Ú“ï¿½ï¿½Jï¿½nï¿½nï¿½_ï¿½ÆIï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½x,yï¿½ï¿½ï¿½Wï¿½Ìï¿½
 
     public static bool attackSound;
     public static bool barrierSound;

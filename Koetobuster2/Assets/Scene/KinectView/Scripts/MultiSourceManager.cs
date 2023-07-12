@@ -26,6 +26,9 @@ public class MultiSourceManager : MonoBehaviour
 
     public static int displayId;
     public static int enemyId;
+    int p_enemyId = -1;
+
+    int lockOnCount = 0;
 
     public RectTransform[] rectTransform = new RectTransform[4];
 
@@ -85,13 +88,35 @@ public class MultiSourceManager : MonoBehaviour
             n_pos[i] = rectTransform[i].localPosition;
             p_pos[i] = rectTransform[i].localPosition;
         }
-        framemod = 10;
+        framemod = 5;
         frame_count = 0;
     }
 
     void Update()
     {
-      if (bodyReader != null) 
+        GetFrame();
+        GetDisplay();
+        UpdateRotation();  
+        LockOn();
+
+        frame_count = (frame_count + 1) % framemod;
+    }
+
+    void OnApplicationQuit()
+    {
+        if (_Sensor != null)
+        {
+            if (_Sensor.IsOpen)
+            {
+                _Sensor.Close();
+            }
+
+            _Sensor = null;
+        }
+    }
+
+    void GetFrame(){
+        if (bodyReader != null) 
         {
             var frame = bodyReader.AcquireLatestFrame();
             if (frame != null) 
@@ -110,7 +135,9 @@ public class MultiSourceManager : MonoBehaviour
                 frame = null;
             }
         }
+    }
 
+    void GetDisplay(){
         float p_border = 0.0f;
         float r_border = 0.1f;
         
@@ -123,25 +150,7 @@ public class MultiSourceManager : MonoBehaviour
         }else if(n_pitch > p_border && n_roll > r_border){
             displayId = 1;
         } // ignored (0, 0)
-
-        UpdateRotation();  
-
-        frame_count = (frame_count + 1) % framemod;
     }
-
-    void OnApplicationQuit()
-    {
-        if (_Sensor != null)
-        {
-            if (_Sensor.IsOpen)
-            {
-                _Sensor.Close();
-            }
-
-            _Sensor = null;
-        }
-    }
-
 
     double Sig(double x, double ss, double tt){
         double s = ss;
@@ -199,53 +208,38 @@ public class MultiSourceManager : MonoBehaviour
                 pos[i].y += aimFirstPos[i,1];
             }
 
-            if(displayId == 0){
-                if(pos[0].x < -960f) enemyId = 0;
-                else enemyId = 1;
-            }else if(displayId == 1){
-                if(pos[1].x < -960f) enemyId = 2;
-                else enemyId = 3;
-            }else if(displayId == 2){
-                if(pos[2].x < 960f) enemyId = 4;
-                    else enemyId = 5;
-            }else if(displayId == 3){
-                if(pos[3].x < 960f) enemyId = 6;
-                else enemyId = 7;
-            }
-
             for(int i=0; i<4; ++i){
-                pos[i].x = aimPos[enemyId,0] + aimFirstPos[i,0];
-                pos[i].y = aimPos[enemyId,1] + aimFirstPos[i,1];
                 p_pos[i] = n_pos[i];
                 n_pos[i] = pos[i];
                 pos[i]   = p_pos[i];
             }
         }else{
-            // yaw = Sig((float)frame_count / framemod, p_yaw, n_yaw);
-            // pitch = Sig((float)frame_count / framemod, p_pitch, n_pitch);
-            // roll = Sig((float)frame_count / framemod, p_roll, n_roll);
-
-            // yaw = f((float)frame_count / framemod, p_yaw, n_yaw);
-            // pitch = f((float)frame_count / framemod, p_pitch, n_pitch);
-            // roll = f((float)frame_count / framemod, p_roll, n_roll);
-
             for(int i=0; i<4; ++i){
                 pos[i].x = f((float)frame_count / framemod, p_pos[i].x, n_pos[i].x);
                 pos[i].y = f((float)frame_count / framemod, p_pos[i].y, n_pos[i].y);
-                // if(pos[i].x == 0f || pos[i].x == 1920f || pos[i].x == 3840f || pos[i].y == 0f || pos[i].y == 1080f){
-                //     pos[i].x = f((float)((frame_count + 1) % framemod) / framemod, p_pos[i].x, n_pos[i].x);
-                //     pos[i].y = f((float)((frame_count + 1) % framemod) / framemod, p_pos[i].y, n_pos[i].y);
-                //     frame_count++;
-                // }
             }
         }        
 
         for(int i=0; i<4; ++i) rectTransform[i].localPosition = pos[i];
+    }
 
-        // debugText.text = "enemyId = " + enemyId.ToString() + "\ndisplayId = " + displayId.ToString();
-        // // debugText.text = "x=" + pos.x.ToString() + ", y=" + pos.y.ToString();
-        // debugText2.text = "x=" + pos2.x.ToString() + ", y=" + pos2.y.ToString();
-        // debugText3.text = "x=" + pos3.x.ToString() + ", y=" + pos3.y.ToString();
-        // debugText4.text = "x=" + pos4.x.ToString() + ", y=" + pos4.y.ToString();
+    void LockOn(){
+        p_enemyId = enemyId;
+        if(displayId == 0){
+            if(pos[0].x < -960f) enemyId = 0;
+            else enemyId = 1;
+        }else if(displayId == 1){
+            if(pos[1].x < -960f) enemyId = 2;
+            else enemyId = 3;
+        }else if(displayId == 2){
+            if(pos[2].x < 960f) enemyId = 4;
+                else enemyId = 5;
+        }else if(displayId == 3){
+            if(pos[3].x < 960f) enemyId = 6;
+            else enemyId = 7;
+        }
+
+        if(p_enemyId == enemyId) lockOnCount += 1;
+        else lockOnCount = 1;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class Shot : MonoBehaviour
@@ -10,10 +11,15 @@ public class Shot : MonoBehaviour
     public float shotInterval;
     public static string lastMojiTag = "LastMoji";
     public static bool shotSound;
-    public Camera camera0;
-    public Camera camera1;
-    public Camera camera2;
-    public Camera camera3;
+    // public Camera camera0;
+    // public Camera camera1;
+    // public Camera camera2;
+    // public Camera camera3;
+
+    float[] end_x   = { -25f, -8f, 8f, 25f, -25f, -8f, 8f, 25f };
+    float[] end_y   = { 10.5f, 9.8f, 9.8f, 10.5f, -10.5f, -9.8f, -9.8f, -10.5f };
+
+    int[] idx = { 6, 7, 4, 5, 0, 1, 2, 3};
 
     /*
     public RectTransform rectTransform;
@@ -133,6 +139,11 @@ public class Shot : MonoBehaviour
 
     Vector3 npos = new Vector3(0, 0, 0), ppos;
     float currentDisplay = 0;
+
+    public Text debugText;
+    public Text debugText2;
+    public Text debugText3;
+    public Text debugText4;
 
     // public UnityEngine.UI.Text unkotext;
 
@@ -261,40 +272,40 @@ public class Shot : MonoBehaviour
         if(Voice.voiceFlag == 1)
         {
             Voice.voiceFlag = 2;
-            Ray ray;
 
-            //-----mouse controll-----//
-            currentDisplay = Input.mousePosition.z;
-            if (currentDisplay == 0)      ray = camera0.ScreenPointToRay(Input.mousePosition);
-            else if (currentDisplay == 1) ray = camera1.ScreenPointToRay(Input.mousePosition);
-            else if (currentDisplay == 2) ray = camera2.ScreenPointToRay(Input.mousePosition);
-            else ray = camera3.ScreenPointToRay(Input.mousePosition);
-
-            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // RaycastHit hit;
             Vector3 playerPosition = Player.transform.position;
-            Vector3 enemyPosition;
+            Vector3 enemyPosition = Vector3.zero;
 
-            if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Enemy"))
-            {
-                Debug.Log("ok");
-                enemyPosition = hit.collider.gameObject.transform.position;
-            }
-            else
-            {
-                Debug.Log("ng");
-                enemyPosition = Input.mousePosition;
+            // if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Enemy"))
+            // {
+            //     Debug.Log("ok");
+            //     enemyPosition = hit.collider.gameObject.transform.position;
+            // }
+            // else
+            // {
+                // enemyPosition = Input.mousePosition;
+                int id = idx[MultiSourceManager.enemyId];
+                enemyPosition.x = end_x[id];
+                enemyPosition.y = end_y[id];
+                enemyPosition.z = playerPosition.z + 15f;
+                debugText.text = enemyPosition.x.ToString() + ", " + enemyPosition.y.ToString() + ", " + enemyPosition.z.ToString() + "\n";
+                debugText2.text = (enemyPosition.x - playerPosition.x).ToString() + ", " + (enemyPosition.y - playerPosition.y).ToString() + ", " + (enemyPosition.z - playerPosition.z).ToString() + "\n";
+                debugText3.text = id.ToString() + ", " + end_x[id].ToString() + ", " + end_y[id].ToString() + "\n";
+                // enemyPosition = Camera.main.ScreenToWorldPoint(enemyPosition);
+            // }
+            float lead;
+            if(id == 0 || id == 3 || id == 4 || id == 7) lead = 5f;
+            else lead = 3f;
 
-                enemyPosition.z += 15f;
-                enemyPosition = Camera.main.ScreenToWorldPoint(enemyPosition);
-            }
             float px = playerPosition.x;
             float py = playerPosition.y;
             float pz = playerPosition.z + 3f;
 
             float ex = enemyPosition.x;
             float ey = enemyPosition.y;
-            float ez = enemyPosition.z + 3f;
+            float ez = enemyPosition.z + lead;
 
             Vector3 angle_y_from = Vector3.forward;
             Vector3 angle_y_to = new Vector3(ex - px, 0f, ez - pz);
