@@ -14,6 +14,7 @@ public class GameEnd : MonoBehaviour
     public GameObject scoreText;
     public GameObject scoreText2;
     public GameObject Clock;
+    AudioSource audioSource;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class GameEnd : MonoBehaviour
         scoreText.SetActive(true);
         scoreText2.SetActive(false);
         Clock.SetActive(true);
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -42,6 +44,7 @@ public class GameEnd : MonoBehaviour
             scoreText.SetActive(false);
             scoreText2.SetActive(true);
             Clock.SetActive(false);
+            audioSource.Play();
         }
     }
 

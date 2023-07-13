@@ -85,8 +85,6 @@ public class Enemy : MonoBehaviour
             flag = true;
             attack = true;
             GetComponent<MeshRenderer>().material = afterMaterial;
-            //Voice.initialFlag = false;
-            
         }
         else if (!(flag) && barrierCnt == 0)
         {

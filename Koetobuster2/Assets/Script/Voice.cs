@@ -19,6 +19,7 @@ public class Voice: MonoBehaviour
     string tmp;
     bool busterFlag;
     public static bool initialFlag;
+    public static bool chargeSound;
 
     void Start()
     {
@@ -75,12 +76,16 @@ public class Voice: MonoBehaviour
                 normal.gameObject.SetActive(false);
                 charge.gameObject.SetActive(true);
                 buster.gameObject.SetActive(false);
+
+                chargeSound = true;
             }
             else
             {
                 normal.gameObject.SetActive(true);
                 charge.gameObject.SetActive(false);
                 buster.gameObject.SetActive(false);
+                
+                chargeSound = false;
             }
             dictationRecognizer.DictationResult += DictationRecognizer_DictationResult;         //音声認識完了したら出力
         }
@@ -94,6 +99,8 @@ public class Voice: MonoBehaviour
                 normal.gameObject.SetActive(false);
                 charge.gameObject.SetActive(false);
                 buster.gameObject.SetActive(true);
+
+                chargeSound = false;
             }
         }
     }
@@ -151,7 +158,7 @@ public class Voice: MonoBehaviour
             {
                 voiceFlag = 1;
                 voiceText = text;
-                if (Panel.panelCh.CompareTo(text[0]) != 0)
+                if (Panel.panelCh != text[0])
                 {
                     initialFlag = false;
                 }

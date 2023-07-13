@@ -25,6 +25,7 @@ public class Bullet : MonoBehaviour
         {
             Voice.voiceFlag = 0;
             Enemy.attack = false;
+            if (!Voice.initialFlag) Voice.initialFlag = true;
         }
     }
 
@@ -48,6 +49,7 @@ public class Bullet : MonoBehaviour
                     Barrier.barrierFlag = true;
                 }
                 Voice.voiceFlag = 0;
+                if (!Voice.initialFlag) Voice.initialFlag = true;
             }
             else if(gameObject.tag != "Untagged")
             {
