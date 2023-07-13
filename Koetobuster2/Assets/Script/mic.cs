@@ -28,7 +28,7 @@ public class mic : MonoBehaviour
         {
             isSound = true;
             CancelInvoke();
-            Invoke("sound", 1.0f);
+            Invoke("sound", 2.0f);
         }
     }
 

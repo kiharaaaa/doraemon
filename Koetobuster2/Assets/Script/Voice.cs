@@ -17,15 +17,16 @@ public class Voice: MonoBehaviour
 
     DictationRecognizer dictationRecognizer;
     string tmp;
-    bool soundFlag, busterFlag;
+    bool busterFlag;
+    public static bool initialFlag;
 
     void Start()
     {
+        initialFlag = true;
         normal.gameObject.SetActive(true);
         charge.gameObject.SetActive(false);
         buster.gameObject.SetActive(false);
         dictationRecognizer = new DictationRecognizer();
-        soundFlag = false;
         busterFlag = false;
 
         dictationRecognizer.Start();
@@ -150,6 +151,10 @@ public class Voice: MonoBehaviour
             {
                 voiceFlag = 1;
                 voiceText = text;
+                if (Panel.panelCh.CompareTo(text[0]) != 0)
+                {
+                    initialFlag = false;
+                }
             }
         }
     }

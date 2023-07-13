@@ -61,7 +61,7 @@ public class NoScene : MonoBehaviour
         var asyncT = SceneManager.LoadSceneAsync("03_Play");
 
         asyncT.allowSceneActivation = false;
-        yield return new WaitForSeconds(6);
+        //yield return new WaitForSeconds(6);
         asyncT.allowSceneActivation = true;
         yield return asyncT;
 

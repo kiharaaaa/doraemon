@@ -34,11 +34,12 @@ public class MultiSourceManager : MonoBehaviour
     int p_enemyId = -1;
 
     int lockOnCount = 0;
-    int lockOnBorder = 60;
+    int lockOnBorder = 30;
 
     public RectTransform[] LockOnRect = new RectTransform[4];
-
     public RectTransform[] rectTransform = new RectTransform[4];
+    private bool[] isAimImageActive = new bool[4];
+    private bool[] isLockOnActive = new bool[4];
 
     public UnityEngine.UI.Text debugText;
     public UnityEngine.UI.Text debugText2;
@@ -101,8 +102,17 @@ public class MultiSourceManager : MonoBehaviour
         }
         framemod = 5;
         frame_count = 0;
-        // lockon_framemod = 5;
-        // lockon_frame_count = 0;
+        for (int i = 0; i < 4; ++i)
+        {
+            isAimImageActive[i] = false;
+            isLockOnActive[i] = false;
+            var sz = rectTransform[i].localScale;
+            sz.x = 0f;
+            rectTransform[i].localScale = sz;
+            sz = LockOnRect[i].localScale;
+            sz.x = 0f;
+            LockOnRect[i].localScale = sz;
+        }
     }
 
     void Update()
@@ -111,6 +121,8 @@ public class MultiSourceManager : MonoBehaviour
         GetDisplay();
         UpdateRotation();  
         LockOnJudge();
+        SetActiveAimImage();
+        SetActiveLockOnImage();
 
         frame_count = (frame_count + 1) % framemod;
         // lockon_frame_count = (lockon_frame_count + 1) % lockon_framemod;
@@ -153,7 +165,7 @@ public class MultiSourceManager : MonoBehaviour
 
     void GetDisplay(){
         float p_border = 0.0f;
-        float r_border = 0.13f;
+        float r_border = 0.1f;
         
         if(n_pitch >= p_border && n_roll < r_border){
             displayId = 2;
@@ -281,5 +293,76 @@ public class MultiSourceManager : MonoBehaviour
         }
 
         for(int i=0; i<4; ++i) LockOnRect[i].localPosition = lockon_pos[i];
+    }
+
+    void SetActiveAimImage()
+    {
+        float[,,] bl = new float[,,]
+        {
+            {{-1920, 0}, {-540, 540} },
+            {{-1920, 0}, {-540, 540} },
+            {{0, 1920}, {-540, 540} },
+            {{0, 1920}, {-540, 540} }
+        };
+        float gap = 100f;
+        for (int i = 0; i < 4; ++i)
+        {
+            var pos = rectTransform[i].localPosition;
+            if (pos.x < bl[i,0,0] - gap || pos.x > bl[i,0,1] + gap || pos.y < bl[i,1,0] - gap || pos.y > bl[i,1,1] + gap) {
+                if (isAimImageActive[i])
+                {
+                    isAimImageActive[i] = false;
+                    var sz = rectTransform[i].localScale;
+                    sz.x = 0f;
+                    rectTransform[i].localScale = sz;
+                }
+            }
+            else
+            {
+                if(!isAimImageActive[i])
+                {
+                    isAimImageActive[i] = true;
+                    var sz = rectTransform[i].localScale;
+                    sz.x = 2f;
+                    rectTransform[i].localScale = sz;
+                }
+            }
+        }
+    }
+
+    void SetActiveLockOnImage()
+    {
+        float[,,] bl = new float[,,]
+        {
+            {{-1920, 0}, {-540, 540} },
+            {{-1920, 0}, {-540, 540} },
+            {{0, 1920}, {-540, 540} },
+            {{0, 1920}, {-540, 540} }
+        };
+        float gap = 100f;
+        for (int i = 0; i < 4; ++i)
+        {
+            var pos = LockOnRect[i].localPosition;
+            if (pos.x < bl[i, 0, 0] - gap || pos.x > bl[i, 0, 1] + gap || pos.y < bl[i, 1, 0] - gap || pos.y > bl[i, 1, 1] + gap)
+            {
+                if (isLockOnActive[i])
+                {
+                    isLockOnActive[i] = false;
+                    var sz = LockOnRect[i].localScale;
+                    sz.x = 0f;
+                    LockOnRect[i].localScale = sz;
+                }
+            }
+            else
+            {
+                if (!isLockOnActive[i])
+                {
+                    isLockOnActive[i] = true;
+                    var sz = LockOnRect[i].localScale;
+                    sz.x = 1f;
+                    LockOnRect[i].localScale = sz;
+                }
+            }
+        }
     }
 }

@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     public static bool attackSound;
     public static bool barrierSound;
     GameObject b;
+    float startTime;
 
     void Start()
     {
@@ -34,11 +35,12 @@ public class Enemy : MonoBehaviour
         this.transform.rotation = rotation;
         HPText.GetComponent<TextMesh>().text = HP.ToString();
         barrierSound = false;
+        startTime = Time.time;
     }
 
     void Update()
     {
-        float t = Time.time;
+        float t = Time.time - startTime;
         if (t > start_sec)
         {
             var diff = t - start_sec;
@@ -58,8 +60,10 @@ public class Enemy : MonoBehaviour
         {
             var diff = t - (start_sec + display_sec);
             var rate = diff / 3f;
+
             if (rate > 1f)
             {
+                Destroy(b);
                 Destroy(gameObject);
             }
             else
@@ -76,15 +80,18 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == HP.ToString())
+        if (collider.gameObject.tag == HP.ToString() && Voice.initialFlag)
         {
             flag = true;
             attack = true;
             GetComponent<MeshRenderer>().material = afterMaterial;
+            //Voice.initialFlag = false;
+            
         }
         else if (!(flag) && barrierCnt == 0)
         {
             b = Instantiate(barrierPrefab, transform.position, Quaternion.identity) as GameObject;
+            Barrier.enemy = gameObject;
             barrierCnt++;
         }
 

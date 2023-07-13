@@ -5,10 +5,11 @@ using UnityEngine;
 public class Barrier : MonoBehaviour
 {
     public static bool barrierFlag = false;
+    public static GameObject enemy;
 
     void FixedUpdate()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Move.MoveSpeed * Time.fixedDeltaTime);
+        transform.position = enemy.transform.position;
 
         if (barrierFlag)
         {

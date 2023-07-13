@@ -138,14 +138,11 @@ public class Shot : MonoBehaviour
     Dictionary<char, GameObject> myTable = new Dictionary<char, GameObject>();
 
     Vector3 npos = new Vector3(0, 0, 0), ppos;
-    float currentDisplay = 0;
 
     public Text debugText;
     public Text debugText2;
     public Text debugText3;
     public Text debugText4;
-
-    // public UnityEngine.UI.Text unkotext;
 
     void Start()
     {
@@ -273,28 +270,17 @@ public class Shot : MonoBehaviour
         {
             Voice.voiceFlag = 2;
 
-            // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            // RaycastHit hit;
             Vector3 playerPosition = Player.transform.position;
             Vector3 enemyPosition = Vector3.zero;
 
-            // if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Enemy"))
-            // {
-            //     Debug.Log("ok");
-            //     enemyPosition = hit.collider.gameObject.transform.position;
-            // }
-            // else
-            // {
-                // enemyPosition = Input.mousePosition;
-                int id = idx[MultiSourceManager.enemyId];
-                enemyPosition.x = end_x[id];
-                enemyPosition.y = end_y[id];
-                enemyPosition.z = playerPosition.z + 15f;
-                debugText.text = enemyPosition.x.ToString() + ", " + enemyPosition.y.ToString() + ", " + enemyPosition.z.ToString() + "\n";
-                debugText2.text = (enemyPosition.x - playerPosition.x).ToString() + ", " + (enemyPosition.y - playerPosition.y).ToString() + ", " + (enemyPosition.z - playerPosition.z).ToString() + "\n";
-                debugText3.text = id.ToString() + ", " + end_x[id].ToString() + ", " + end_y[id].ToString() + "\n";
-                // enemyPosition = Camera.main.ScreenToWorldPoint(enemyPosition);
-            // }
+            int id = idx[MultiSourceManager.enemyId];
+            enemyPosition.x = end_x[id];
+            enemyPosition.y = end_y[id];
+            enemyPosition.z = playerPosition.z + 15f;
+            debugText.text = enemyPosition.x.ToString() + ", " + enemyPosition.y.ToString() + ", " + enemyPosition.z.ToString() + "\n";
+            debugText2.text = (enemyPosition.x - playerPosition.x).ToString() + ", " + (enemyPosition.y - playerPosition.y).ToString() + ", " + (enemyPosition.z - playerPosition.z).ToString() + "\n";
+            debugText3.text = id.ToString() + ", " + end_x[id].ToString() + ", " + end_y[id].ToString() + "\n";
+
             float lead;
             if(id == 0 || id == 3 || id == 4 || id == 7) lead = 5f;
             else lead = 3f;
@@ -342,6 +328,7 @@ public class Shot : MonoBehaviour
                 if (cnt == 1)
                 {
                     c.tag = Voice.voiceText.Length.ToString();
+                    Panel.panelFlag = true;
                 }
                 if (cnt == n)
                 {

@@ -16,26 +16,26 @@ public class DebugText : MonoBehaviour
 
     void Update()
     {
-    //     if(Input.GetKeyDown(KeyCode.DownArrow)){
-    //         var tmp = pos;
-    //         tmp.y -= 10f;
-    //         pos = tmp;
-    //     }
-    //     if(Input.GetKeyDown(KeyCode.UpArrow)){
-    //         var tmp = pos;
-    //         tmp.y += 10f;
-    //         pos = tmp;
-    //     }
-    //     if(Input.GetKeyDown(KeyCode.LeftArrow)){
-    //         var tmp = pos;
-    //         tmp.x -= 10f;
-    //         pos = tmp;
-    //     }
-    //     if(Input.GetKeyDown(KeyCode.RightArrow)){
-    //         var tmp = pos;
-    //         tmp.x += 10f;
-    //         pos = tmp;
-    //     }
-    //     text.text = pos.x.ToString() + ", " + pos.y.ToString();
+        //     if(Input.GetKeyDown(KeyCode.DownArrow)){
+        //         var tmp = pos;
+        //         tmp.y -= 10f;
+        //         pos = tmp;
+        //     }
+        //     if(Input.GetKeyDown(KeyCode.UpArrow)){
+        //         var tmp = pos;
+        //         tmp.y += 10f;
+        //         pos = tmp;
+        //     }
+        //     if(Input.GetKeyDown(KeyCode.LeftArrow)){
+        //         var tmp = pos;
+        //         tmp.x -= 10f;
+        //         pos = tmp;
+        //     }
+        //     if(Input.GetKeyDown(KeyCode.RightArrow)){
+        //         var tmp = pos;
+        //         tmp.x += 10f;
+        //         pos = tmp;
+        //     }
+        //     text.text = pos.x.ToString() + ", " + pos.y.ToString();
     }
 }

@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
         if (gameObject.transform.position.z > z + 16 && gameObject.tag == Shot.lastMojiTag)
         {
             Voice.voiceFlag = 0;
+            Enemy.attack = false;
         }
     }
 
