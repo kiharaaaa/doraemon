@@ -14,21 +14,29 @@ public class MultiSourceManager : MonoBehaviour
     // private Windows.Kinect.Vector4 FaceRotation;
     private static int frame_count;
     private int framemod;
+    // private int lockon_frame_count;
+    // private int lockon_framemod;
 
     public static double yaw, pitch, roll;
     public static double n_yaw, n_pitch, n_roll;
     public static double p_yaw, p_pitch, p_roll;
 
-
     public static Vector3[] pos = new Vector3[4];
     public static Vector3[] p_pos = new Vector3[4];
     public static Vector3[] n_pos = new Vector3[4];
+
+    public static Vector3[] lockon_pos = new Vector3[4];
+    public static Vector3[] lockon_p_pos = new Vector3[4];
+    public static Vector3[] lockon_n_pos = new Vector3[4];
 
     public static int displayId;
     public static int enemyId;
     int p_enemyId = -1;
 
     int lockOnCount = 0;
+    int lockOnBorder = 60;
+
+    public RectTransform[] LockOnRect = new RectTransform[4];
 
     public RectTransform[] rectTransform = new RectTransform[4];
 
@@ -85,11 +93,16 @@ public class MultiSourceManager : MonoBehaviour
             tmp.x = aimFirstPos[i,0] + aimPos[0,0];
             tmp.y = aimFirstPos[i,1] + aimPos[0,1];
             rectTransform[i].localPosition = tmp;
-            n_pos[i] = rectTransform[i].localPosition;
-            p_pos[i] = rectTransform[i].localPosition;
+            n_pos[i] = tmp;
+            p_pos[i] = tmp;
+            LockOnRect[i].localPosition = tmp;
+            lockon_n_pos[i] = tmp;
+            lockon_p_pos[i] = tmp;
         }
         framemod = 5;
         frame_count = 0;
+        // lockon_framemod = 5;
+        // lockon_frame_count = 0;
     }
 
     void Update()
@@ -97,9 +110,10 @@ public class MultiSourceManager : MonoBehaviour
         GetFrame();
         GetDisplay();
         UpdateRotation();  
-        LockOn();
+        LockOnJudge();
 
         frame_count = (frame_count + 1) % framemod;
+        // lockon_frame_count = (lockon_frame_count + 1) % lockon_framemod;
     }
 
     void OnApplicationQuit()
@@ -139,7 +153,7 @@ public class MultiSourceManager : MonoBehaviour
 
     void GetDisplay(){
         float p_border = 0.0f;
-        float r_border = 0.1f;
+        float r_border = 0.13f;
         
         if(n_pitch >= p_border && n_roll < r_border){
             displayId = 2;
@@ -199,8 +213,8 @@ public class MultiSourceManager : MonoBehaviour
             pitch = Math.Round(pitch, 3, MidpointRounding.AwayFromZero);
             roll = Math.Round(roll, 3, MidpointRounding.AwayFromZero);
 
-            tmp.x = -4000*(float)pitch;
-            tmp.y = -10000*(float)roll + 2000;
+            tmp.x = -3000*(float)pitch;
+            tmp.y = -10000*(float)roll + 1000;
 
             for(int i=0; i<4; ++i){
                 pos[i] = tmp;
@@ -223,7 +237,7 @@ public class MultiSourceManager : MonoBehaviour
         for(int i=0; i<4; ++i) rectTransform[i].localPosition = pos[i];
     }
 
-    void LockOn(){
+    void LockOnJudge(){
         p_enemyId = enemyId;
         if(displayId == 0){
             if(pos[0].x < -960f) enemyId = 0;
@@ -239,7 +253,33 @@ public class MultiSourceManager : MonoBehaviour
             else enemyId = 7;
         }
 
-        if(p_enemyId == enemyId) lockOnCount += 1;
-        else lockOnCount = 1;
+        if(p_enemyId == enemyId){
+            lockOnCount += 1;
+        }else{
+            lockOnCount = 1;
+            LockOn.lockon_flag = 0;
+        }
+
+        if(frame_count % framemod == 0){
+            for(int i=0; i<4; ++i){
+                lockon_p_pos[i] = lockon_n_pos[i];
+                var tmp = Vector3.zero;
+                tmp.x = aimPos[enemyId, 0] + aimFirstPos[i, 0];
+                tmp.y = aimPos[enemyId, 1] + aimFirstPos[i, 1];
+                lockon_n_pos[i] = tmp;
+                lockon_pos[i] = lockon_p_pos[i];
+            }
+        }else{
+            for(int i=0; i<4; ++i){
+                lockon_pos[i].x = f((float)frame_count / framemod, lockon_p_pos[i].x, lockon_n_pos[i].x);
+                lockon_pos[i].y = f((float)frame_count / framemod, lockon_p_pos[i].y, lockon_n_pos[i].y);
+            }
+        }
+
+        if(lockOnCount >= lockOnBorder){
+            LockOn.lockon_flag = 1;
+        }
+
+        for(int i=0; i<4; ++i) LockOnRect[i].localPosition = lockon_pos[i];
     }
 }
