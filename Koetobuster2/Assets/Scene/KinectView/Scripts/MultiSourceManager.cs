@@ -29,6 +29,11 @@ public class MultiSourceManager : MonoBehaviour
     public static Vector3[] lockon_p_pos = new Vector3[4];
     public static Vector3[] lockon_n_pos = new Vector3[4];
 
+    private bool ngAreaFlag;
+    private float ngGap;
+
+    private float[,] ngArea;
+
     public static int displayId;
     public static int enemyId;
     int p_enemyId = -1;
@@ -74,13 +79,7 @@ public class MultiSourceManager : MonoBehaviour
     {
         _Sensor = KinectSensor.GetDefault();
         
-        if (_Sensor != null)
-        {
-            if (!_Sensor.IsOpen)
-            {
-                _Sensor.Open();
-            }
-        }   
+        AwakeKinect();
 
         bodyCount = _Sensor.BodyFrameSource.BodyCount;
         bodyReader = _Sensor.BodyFrameSource.OpenReader();
@@ -113,6 +112,14 @@ public class MultiSourceManager : MonoBehaviour
             sz.x = 0f;
             LockOnRect[i].localScale = sz;
         }
+        ngAreaFlag = false;
+        ngGap = 150f;
+        ngArea = new float[,]{
+            {-1920f, 540f},
+            {-1920f, 540f},
+            {1920f, -540f},
+            {1920f, -540f}
+        };
     }
 
     void Update()
@@ -141,7 +148,18 @@ public class MultiSourceManager : MonoBehaviour
         }
     }
 
+    void AwakeKinect(){
+        if (_Sensor != null)
+        {
+            if (!_Sensor.IsOpen)
+            {
+                _Sensor.Open();
+            }
+        }   
+    }
+
     void GetFrame(){
+        AwakeKinect();
         if (bodyReader != null) 
         {
             var frame = bodyReader.AcquireLatestFrame();
@@ -244,9 +262,23 @@ public class MultiSourceManager : MonoBehaviour
                 pos[i].x = f((float)frame_count / framemod, p_pos[i].x, n_pos[i].x);
                 pos[i].y = f((float)frame_count / framemod, p_pos[i].y, n_pos[i].y);
             }
-        }        
+        }    
 
-        for(int i=0; i<4; ++i) rectTransform[i].localPosition = pos[i];
+        for(int i=0; i<4; ++i){
+            if(pos[i].x >= ngArea[i,0]-ngGap && pos[i].x <= ngArea[i,0]+ngGap && pos[i].y >= ngArea[i,1]-ngGap && pos[i].y <= ngArea[i,1]+ngGap){
+                ngAreaFlag = true;
+            }
+        }    
+
+        if(ngAreaFlag){
+            debugText.text = "Yes\n";
+            ngAreaFlag = false;
+            return;
+        }
+
+        for(int i=0; i<4; ++i){
+            rectTransform[i].localPosition = pos[i];
+        }
     }
 
     void LockOnJudge(){
