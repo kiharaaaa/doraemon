@@ -48,9 +48,14 @@ public class Panel : MonoBehaviour
         {
             panelFlag = false;
             cnt++;
-            panelText.text = "" + list[cnt];
-            panelCh = list[cnt];
+            Invoke("changePanel", 0.7f);
         }
+    }
+
+    void changePanel()
+    {
+        panelText.text = "" + list[cnt];
+        panelCh = list[cnt];
     }
 }
 

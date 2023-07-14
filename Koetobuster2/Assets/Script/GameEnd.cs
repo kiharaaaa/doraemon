@@ -12,7 +12,9 @@ public class GameEnd : MonoBehaviour
     public GameObject backGround3;
     public GameObject backGround4;
     public GameObject scoreText;
-    public GameObject scoreText2;
+    public GameObject clearTextLeft;
+    public GameObject clearTextRight;
+    public GameObject Panel;
     public GameObject Clock;
     AudioSource audioSource;
 
@@ -24,7 +26,9 @@ public class GameEnd : MonoBehaviour
         backGround3.SetActive(false);
         backGround4.SetActive(false);
         scoreText.SetActive(true);
-        scoreText2.SetActive(false);
+        clearTextLeft.SetActive(false);
+        clearTextRight.SetActive(false);
+        Panel.SetActive(true);
         Clock.SetActive(true);
         audioSource = GetComponent<AudioSource>();
     }
@@ -35,14 +39,17 @@ public class GameEnd : MonoBehaviour
         {
             Invoke("title", 7);
             end = false;
-            scoreText2.GetComponent<Text>().text = "SCORE:" + Score.score.ToString();
+            clearTextLeft.GetComponent<Text>().text = "SCORE:";
+            clearTextRight.GetComponent<Text>().text = (Score.score * 100).ToString();
 
             backGround1.SetActive(true);
             backGround2.SetActive(true);
             backGround3.SetActive(true);
             backGround4.SetActive(true);
             scoreText.SetActive(false);
-            scoreText2.SetActive(true);
+            clearTextLeft.SetActive(true);
+            clearTextRight.SetActive(true);
+            Panel.SetActive(false);
             Clock.SetActive(false);
             audioSource.Play();
         }

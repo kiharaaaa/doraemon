@@ -173,6 +173,11 @@ public class Voice: MonoBehaviour
             Debug.Log("認識した音声：" + text);
             busterFlag = true;
 
+            if (text.Length > 20)
+            {
+                text = text.Substring(0, 20);
+            }
+
             if (text.Length != 1)
             {
                 voiceFlag = 1;
