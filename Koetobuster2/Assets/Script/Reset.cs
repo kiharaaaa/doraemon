@@ -7,9 +7,14 @@ public class Reset : MonoBehaviour
 {
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("01_Title");
+        }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene("03_Play");
+            string now = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(now);
         }
     }
 }

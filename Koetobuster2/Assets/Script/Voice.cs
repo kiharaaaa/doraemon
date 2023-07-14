@@ -20,6 +20,8 @@ public class Voice: MonoBehaviour
     bool busterFlag;
     public static bool initialFlag;
     public static bool chargeSound;
+    bool speechFlag = true;
+    string status = "";
 
     void Start()
     {
@@ -54,56 +56,73 @@ public class Voice: MonoBehaviour
         c.Add('ャ', 'ゃ');c.Add('ュ', 'ゅ');c.Add('ョ', 'ょ');
         c.Add('ッ', 'っ');c.Add('ヴ', 'ゔ');c.Add('ー', 'ー');
     }
-
-    string status = "";
+    
     void Update()
     {
-        // status が前回と違ったら
-        if (status != dictationRecognizer.Status.ToString())
+        // スペースを押している間ミュート
+        if (Input.GetKey(KeyCode.Space))
         {
-            Debug.Log(dictationRecognizer.Status);
-            status = dictationRecognizer.Status.ToString();
-
-            if(status == "Stopped")
-            {
-                dictationRecognizer.Start();
-            }
-        }
-
-        if (voiceFlag == 0)
-        {
-            if (mic.isSound) {
-                normal.gameObject.SetActive(false);
-                charge.gameObject.SetActive(true);
-                buster.gameObject.SetActive(false);
-
-                chargeSound = true;
-            }
-            else
-            {
-                normal.gameObject.SetActive(true);
-                charge.gameObject.SetActive(false);
-                buster.gameObject.SetActive(false);
-                
-                chargeSound = false;
-            }
-            dictationRecognizer.DictationResult += DictationRecognizer_DictationResult;         //音声認識完了したら出力
+            speechFlag = false;
         }
         else
         {
-            tmp = "";
-            //soundFlag = false;
+            speechFlag = true;
+        }
 
-            if (busterFlag)
+        if (speechFlag)
+        {
+            status = dictationRecognizer.Status.ToString();
+
+            if (status == "Stopped")
             {
-                normal.gameObject.SetActive(false);
-                charge.gameObject.SetActive(false);
-                buster.gameObject.SetActive(true);
+                dictationRecognizer.Start();
 
-                chargeSound = false;
+                voiceFlag = 0;
+            }
+
+            if (voiceFlag == 0)
+            {
+                if (mic.isSound)
+                {
+                    normal.gameObject.SetActive(false);
+                    charge.gameObject.SetActive(true);
+                    buster.gameObject.SetActive(false);
+
+                    chargeSound = true;
+                }
+                else
+                {
+                    normal.gameObject.SetActive(true);
+                    charge.gameObject.SetActive(false);
+                    buster.gameObject.SetActive(false);
+
+                    chargeSound = false;
+                }
+                dictationRecognizer.DictationResult += DictationRecognizer_DictationResult;      //音声認識完了したら出力
+            }
+            else
+            {
+                tmp = "";
+
+                if (busterFlag)
+                {
+                    normal.gameObject.SetActive(false);
+                    charge.gameObject.SetActive(false);
+                    buster.gameObject.SetActive(true);
+
+                    chargeSound = false;
+                }
             }
         }
-    }
+        else
+        {
+            normal.gameObject.SetActive(false);
+            charge.gameObject.SetActive(false);
+            buster.gameObject.SetActive(false);
+
+            dictationRecognizer.Stop();
+        }
+     }
 
     string KanjiToKatakana(string sentence)  // 漢字をカタカナに変換
     {
